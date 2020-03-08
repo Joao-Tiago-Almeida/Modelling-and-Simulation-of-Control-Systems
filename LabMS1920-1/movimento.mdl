@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.9"
+    ComputedModelVersion    "1.11"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -75,9 +75,9 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[1363.0, 764.0]
-	ZoomFactor		[3.8736842105263158]
-	Offset			[401.6692934782609, 136.38586956521738]
-	SceneRectInView		[401.6692934782609, 136.38586956521738, 351.86141304347825, 197.22826086956522]
+	ZoomFactor		[1.75]
+	Offset			[160.44646739130428, 39.5834627329192]
+	SceneRectInView		[160.44646739130428, 39.5834627329192, 778.85714285714289, 436.57142857142856]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -118,9 +118,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "joaotiagoalmeida"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Mar 07 23:57:27 2020"
-  RTWModifiedTimeStamp	  505526246
-  ModelVersionFormat	  "1.%<AutoIncrement:9>"
+  LastModifiedDate	  "Sun Mar 08 12:09:29 2020"
+  RTWModifiedTimeStamp	  505570167
+  ModelVersionFormat	  "1.%<AutoIncrement:11>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -1095,9 +1095,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "387"
+    ZoomFactor		    "175"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "8"
+    SIDHighWatermark	    "11"
     SimulinkSubDomain	    "Simulink"
     Block {
       BlockType		      FromWorkspace
@@ -1106,6 +1106,15 @@ Model {
       Position		      [445, 228, 510, 252]
       ZOrder		      28
       VariableName	      "Vo"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      FromWorkspace
+      Name		      "From\nWorkspace1"
+      SID		      "10"
+      Position		      [445, 178, 510, 202]
+      ZOrder		      30
+      VariableName	      "Yo"
       SampleTime	      "0"
     }
     Block {
@@ -1132,33 +1141,38 @@ Model {
       ContinuousStateAttributes	"'speed'"
     }
     Block {
+      BlockType		      Integrator
+      Name		      "Integrator1"
+      SID		      "9"
+      Ports		      [2, 1]
+      Position		      [620, 167, 650, 198]
+      ZOrder		      29
+      InitialConditionSource  "external"
+    }
+    Block {
       BlockType		      ToWorkspace
       Name		      "To Workspace"
       SID		      "4"
       Ports		      [1]
-      Position		      [620, 260, 710, 290]
+      Position		      [670, 260, 760, 290]
       ZOrder		      24
       VariableName	      "velocity"
       MaxDataPoints	      "inf"
       FixptAsFi		      on
       SampleTime	      "-1"
     }
-    Line {
-      ZOrder		      4
-      SrcBlock		      "Integrator"
-      SrcPort		      1
-      Points		      [20, 0; 0, 40]
-      Branch {
-	ZOrder			6
-	Points			[0, 40]
-	DstBlock		"Gain"
-	DstPort			1
-      }
-      Branch {
-	ZOrder			5
-	DstBlock		"To Workspace"
-	DstPort			1
-      }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace1"
+      SID		      "11"
+      Ports		      [1]
+      Position		      [670, 170, 760, 200]
+      ZOrder		      31
+      VariableName	      "position"
+      MaxDataPoints	      "inf"
+      SaveFormat	      "Timeseries"
+      FixptAsFi		      on
+      SampleTime	      "-1"
     }
     Line {
       ZOrder		      8
@@ -1174,6 +1188,47 @@ Model {
       SrcPort		      1
       DstBlock		      "Integrator"
       DstPort		      2
+    }
+    Line {
+      ZOrder		      13
+      SrcBlock		      "Integrator"
+      SrcPort		      1
+      Points		      [20, 0]
+      Branch {
+	ZOrder			17
+	Points			[0, -60]
+	DstBlock		"Integrator1"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			16
+	Points			[0, 40]
+	Branch {
+	  ZOrder		  15
+	  Points		  [0, 40]
+	  DstBlock		  "Gain"
+	  DstPort		  1
+	}
+	Branch {
+	  ZOrder		  14
+	  DstBlock		  "To Workspace"
+	  DstPort		  1
+	}
+      }
+    }
+    Line {
+      ZOrder		      21
+      SrcBlock		      "From\nWorkspace1"
+      SrcPort		      1
+      DstBlock		      "Integrator1"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      22
+      SrcBlock		      "Integrator1"
+      SrcPort		      1
+      DstBlock		      "To Workspace1"
+      DstPort		      1
     }
   }
 }
