@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.11"
+    ComputedModelVersion    "1.12"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -118,9 +118,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "joaotiagoalmeida"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Mar 08 12:09:29 2020"
-  RTWModifiedTimeStamp	  505570167
-  ModelVersionFormat	  "1.%<AutoIncrement:11>"
+  LastModifiedDate	  "Mon Mar 09 09:58:10 2020"
+  RTWModifiedTimeStamp	  505648683
+  ModelVersionFormat	  "1.%<AutoIncrement:12>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -1125,7 +1125,7 @@ Model {
       ZOrder		      23
       BlockMirror	      on
       NamePlacement	      "alternate"
-      Gain		      "-massa/beta"
+      Gain		      "-beta/massa"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off

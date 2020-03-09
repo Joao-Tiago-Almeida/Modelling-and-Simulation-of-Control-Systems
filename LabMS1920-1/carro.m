@@ -3,11 +3,11 @@ beta = 5;
 Vo_ = 3;
 Yo_ = 5;
 Yo = timeseries(5);
-stop_time = 1;
+stop_time = 40;
 
-clf;
-figure(1); grid on; hold on;
-figure(2); grid on; hold on;
+
+figure(1); clf; grid on; hold on;
+figure(2); clf; grid on; hold on;
 
 v_legend_1=['Vo = ' num2str(-Vo_)];
 v_legend_2=['Vo = ' num2str(Vo_)];
