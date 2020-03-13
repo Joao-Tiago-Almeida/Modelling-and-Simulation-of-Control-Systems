@@ -1,0 +1,22 @@
+%delete all variables
+clear
+
+alfa1 = 1;
+alfa2 = 1;
+delta1 = -1;
+delta2 = 1;
+N1o = timeseries(2);
+N2o = timeseries(2);
+stop_time = 1;
+
+sim_out = sim('modelo');
+
+figure(1)
+plot(sim_out.tout,sim_out.N1,sim_out.tout,sim_out.N2);
+
+a=sim_out.N;
+
+size(a,1)
+
+
+delta1*u(2,size(u,1))-alfa1*u(1)*u(2)

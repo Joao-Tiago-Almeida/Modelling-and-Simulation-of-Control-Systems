@@ -1,3 +1,6 @@
+%delete all variables
+clear
+
 massa = 30;
 beta = 5;
 Vo_ = 3;
