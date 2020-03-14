@@ -1,44 +1,42 @@
 %delete all variables
 clear
 
-massa = 30;
-beta = 5;
-Vo_ = 3;
+massa_ = [30 25 30];
+beta_ = [5 5 4];
+Vo_ = [-3, 3];
 Yo_ = 5;
 Yo = timeseries(5);
-stop_time = 40;
+stop_time = 25;
 
+figure(1);clf; grid on; hold on;
+title('Velocity');xlabel('t [s]');ylabel('v(t) [m/s]');
+figure(2);clf; grid on; hold on;
+title('Position');xlabel('t [s]');ylabel('y(t) [m]')
 
-figure(1); clf; grid on; hold on;
-figure(2); clf; grid on; hold on;
+plotHandlesV = zeros(1,6);
+plotLabelsV = cell(1,6);
+plotHandlesY = zeros(1,6);
+plotLabelsY = cell(1,6);
 
-v_legend_1=['Vo = ' num2str(-Vo_)];
-v_legend_2=['Vo = ' num2str(Vo_)];
-y_legend_1=['Vo = ' num2str(-Yo_)];
-y_legend_2=['Vo = ' num2str(Yo_)];
-
+for i = 1:3
     
-for Vo = [timeseries(-Vo_), timeseries(Vo_)]
-    sim_out = sim('movimento');
-    figure(1)
-    plot(sim_out.tout, sim_out.velocity);
-    figure(2)
-    plot(sim_out.position.Time, sim_out.position.Data);
+    massa = massa_(i);
+    beta = beta_(i);
+
+    for j = [1 2]
+        Vo = timeseries(Vo_(j));
+        sim_out = sim('movimento');
+        figure(1)
+        plotHandlesV(i+(j-1)*3) = plot(sim_out.tout, sim_out.velocity);
+        plotLabelsV{i+(j-1)*3}=['Vo = ' num2str(Vo_(j)) 'm/s; massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s'];
+        figure(2)
+        plotHandlesY(i+(j-1)*3) = plot(sim_out.position.Time, sim_out.position.Data);
+        plotLabelsY{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s'];
+    end
 end
 
 figure(1);
-legend(v_legend_1, v_legend_2, 'Location', 'best'); hold off;
-title('Velocity');xlabel('t [s]');ylabel('v(t) [m/s]');
+lgdv = legend(plotHandlesV, plotLabelsV, 'Location', 'best');
 figure(2);
-legend(y_legend_1, y_legend_2, 'Location', 'best'); hold off;
-title('Position');xlabel('t [s]');ylabel('y(t) [m]')
-
-%Porque é que a v(y), não é linear
-figure(3);
-plot(sim_out.position.Data, sim_out.velocity);
-title('velocity(position)');xlabel('y(t) [m]');ylabel('v(t) [m/s]')
-grid on;
-%https://www.mathworks.com/help/deeplearning/ref/regression.html
-[r,m,b] = regression(sim_out.position.Data', sim_out.velocity');
-legend_vy = ['v = ' num2str(m) '*y + ' num2str(b)];
-legend(legend_vy, 'Location', 'best'); hold off;
+lgdy = legend(plotHandlesY, plotLabelsY, 'Location', 'best');
+lgdy.NumColumns = 2;
