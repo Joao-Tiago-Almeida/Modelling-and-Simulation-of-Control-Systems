@@ -29,10 +29,10 @@ for i = 1:3
         figure(1)
         % i+(j-1)*3 -- increase 1:6 trought i and j
         plotHandlesV(i+(j-1)*3) = plot(sim_out.tout, sim_out.velocity);
-        plotLabelsV{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s'];
+        plotLabelsV{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s; \Gamma = m/\beta = ' num2str(massa/beta) 's'];
         figure(2)
         plotHandlesY(i+(j-1)*3) = plot(sim_out.position.Time, sim_out.position.Data);
-        plotLabelsY{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s'];
+        plotLabelsY{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s; \Gamma = m/\beta = ' num2str(massa/beta) 's'];
     end
 end
 

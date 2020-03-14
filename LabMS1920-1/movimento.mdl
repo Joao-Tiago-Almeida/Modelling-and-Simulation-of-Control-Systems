@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.12"
+    ComputedModelVersion    "1.13"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -118,9 +118,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "joaotiagoalmeida"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Mar 09 09:58:10 2020"
-  RTWModifiedTimeStamp	  505648683
-  ModelVersionFormat	  "1.%<AutoIncrement:12>"
+  LastModifiedDate	  "Sat Mar 14 16:26:29 2020"
+  RTWModifiedTimeStamp	  506103562
+  ModelVersionFormat	  "1.%<AutoIncrement:13>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -1121,7 +1121,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain"
       SID		      "3"
-      Position		      [540, 300, 570, 330]
+      Position		      [530, 300, 600, 350]
       ZOrder		      23
       BlockMirror	      on
       NamePlacement	      "alternate"
@@ -1178,7 +1178,7 @@ Model {
       ZOrder		      8
       SrcBlock		      "Gain"
       SrcPort		      1
-      Points		      [-10, 0]
+      Points		      [-5, 0; 0, -100]
       DstBlock		      "Integrator"
       DstPort		      1
     }
@@ -1202,10 +1202,10 @@ Model {
       }
       Branch {
 	ZOrder			16
-	Points			[0, 40]
+	Points			[0, 40; 29, 0]
 	Branch {
 	  ZOrder		  15
-	  Points		  [0, 40]
+	  Points		  [0, 50]
 	  DstBlock		  "Gain"
 	  DstPort		  1
 	}
