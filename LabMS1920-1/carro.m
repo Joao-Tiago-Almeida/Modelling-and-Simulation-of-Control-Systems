@@ -40,21 +40,20 @@ end
 figure(1);
 lgdv = legend(plotHandlesV, plotLabelsV, 'Location', 'northeast');
 figure(2);
-lgdy = legend(plotHandlesY, plotLabelsY, 'Location', 'best');
-lgdy.NumColumns = 2;
+lgdy = legend(plotHandlesY, plotLabelsY, 'Location', 'east');
 
 
 %draw elips in steady points
 figure(1);
 elpsv1 = annotation('ellipse',[0.1 .9 .05 .05]);
-tav1 = annotation('textarrow', [0.25 0.15], [0.83 0.91]);
+tav1 = annotation('textarrow', [0.25 0.15], [0.85 0.91]);
 tav1.String = 'Vo';
 elpsv2 = annotation('ellipse',[0.1 .09 .05 .05]);
-tav2 = annotation('textarrow', [0.25 0.15], [0.19 0.13]);
+tav2 = annotation('textarrow', [0.25 0.15], [0.17 0.13]);
 tav2.String = '-Vo';
 
 
 figure(2);
 elpsy = annotation('ellipse',[0.1 .49 .05 .05]);
-tay = annotation('textarrow', [0.25 0.15], [0.42 0.5]);
+tay = annotation('textarrow', [0.25 0.15], [0.52 0.52]);
 tay.String = 'yo';
