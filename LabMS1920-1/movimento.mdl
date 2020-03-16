@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.13"
+    ComputedModelVersion    "1.14"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -118,9 +118,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "joaotiagoalmeida"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Mar 14 16:26:29 2020"
-  RTWModifiedTimeStamp	  506103562
-  ModelVersionFormat	  "1.%<AutoIncrement:13>"
+  LastModifiedDate	  "Mon Mar 16 20:02:49 2020"
+  RTWModifiedTimeStamp	  506289763
+  ModelVersionFormat	  "1.%<AutoIncrement:14>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -239,10 +239,10 @@ Model {
 	  Description		  ""
 	  Components		  []
 	  StartTime		  "0.0"
-	  StopTime		  "stop_time"
+	  StopTime		  "20"
 	  AbsTol		  "auto"
 	  AutoScaleAbsTol	  on
-	  FixedStep		  "auto"
+	  FixedStep		  "0.1"
 	  InitialStep		  "auto"
 	  MaxOrder		  5
 	  ZcThreshold		  "auto"
@@ -256,14 +256,14 @@ Model {
 	  RelTol		  "1e-3"
 	  EnableMultiTasking	  off
 	  ConcurrentTasks	  off
-	  Solver		  "VariableStepAuto"
-	  SolverName		  "VariableStepAuto"
+	  Solver		  "FixedStepAuto"
+	  SolverName		  "FixedStepAuto"
 	  SolverJacobianMethodControl "auto"
 	  ShapePreserveControl	  "DisableAll"
 	  ZeroCrossControl	  "UseLocalSettings"
 	  ZeroCrossAlgorithm	  "Nonadaptive"
 	  AlgebraicLoopSolver	  "TrustRegion"
-	  SolverInfoToggleStatus  off
+	  SolverInfoToggleStatus  on
 	  IsAutoAppliedInSIP	  off
 	  SolverResetMethod	  "Fast"
 	  PositivePriorityOrder	  off
