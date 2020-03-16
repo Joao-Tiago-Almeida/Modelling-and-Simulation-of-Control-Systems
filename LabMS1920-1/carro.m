@@ -1,8 +1,8 @@
 %delete all variables
 clear
 
-massa_ = [30 25 30];
-beta_ = [5 5 4];
+massa_ = [30 15 15];
+beta_ = [5 5 10];
 Vo_ = [-3, 3];
 Yo_ = 5;
 Yo = timeseries(Yo_);
