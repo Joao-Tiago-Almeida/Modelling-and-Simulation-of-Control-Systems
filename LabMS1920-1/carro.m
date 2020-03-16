@@ -13,11 +13,11 @@ stop_time = 25;
 
 % settings da figura 1 - velocidade
 figure(1);clf; grid on; hold on;
-title('Velocity');xlabel('t [s]');ylabel('v(t) [m/s]');
+title('Variação da velocidade (v) com o tempo (t)');xlabel('t [s]');ylabel('v(t) [m/s]');
 
 % settings da figura 2 - posição
 figure(2);clf; grid on; hold on;
-title('Position');xlabel('t [s]');ylabel('y(t) [m]')
+title('Variação da posição (y) com o tempo (t)');xlabel('t [s]');ylabel('y(t) [m]')
 
 % criação dos arrays para alojar legendas e plots
 plotHandlesV = zeros(1,6);
@@ -37,11 +37,11 @@ for i = 1:3 % loop para cada par massa/beta
         % \/ desenho no primeiro plot - velocidade \/
         figure(1) % faz plot e guarda-o conjuntamente com as variáveis
         plotHandlesV(i+(j-1)*3) = plot(sim_out.tout, sim_out.velocity);
-        plotLabelsV{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s; \Gamma = m/\beta = ' num2str(massa/beta) 's'];
+        plotLabelsV{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s; \tau = m/\beta = ' num2str(massa/beta) 's'];
         % \/ desenho no segundo plot - posição \/
         figure(2) % faz plot e guarda-o conjuntamente com as variáveis
         plotHandlesY(i+(j-1)*3) = plot(sim_out.position.Time, sim_out.position.Data); 
-        plotLabelsY{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s; \Gamma = m/\beta = ' num2str(massa/beta) 's'];
+        plotLabelsY{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s; \tau = m/\beta = ' num2str(massa/beta) 's'];
     end
 end
 
