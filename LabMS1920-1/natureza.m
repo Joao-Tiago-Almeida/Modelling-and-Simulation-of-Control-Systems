@@ -48,8 +48,8 @@ legend('pressas.mat','aproximação');
 
 axis([0 4 0 5])
 
-close all
+%close all
 
 %é suposto mandar o yr?
-erro([5 6], yr)
+%erro([5 6], yr)
 
