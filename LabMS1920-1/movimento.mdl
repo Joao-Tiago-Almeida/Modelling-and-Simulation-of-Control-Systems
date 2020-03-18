@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.14"
+    ComputedModelVersion    "1.15"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -118,9 +118,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "joaotiagoalmeida"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Mar 16 20:02:49 2020"
-  RTWModifiedTimeStamp	  506289763
-  ModelVersionFormat	  "1.%<AutoIncrement:14>"
+  LastModifiedDate	  "Wed Mar 18 10:24:00 2020"
+  RTWModifiedTimeStamp	  506427828
+  ModelVersionFormat	  "1.%<AutoIncrement:15>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -239,7 +239,7 @@ Model {
 	  Description		  ""
 	  Components		  []
 	  StartTime		  "0.0"
-	  StopTime		  "20"
+	  StopTime		  "stop_time"
 	  AbsTol		  "auto"
 	  AutoScaleAbsTol	  on
 	  FixedStep		  "0.1"

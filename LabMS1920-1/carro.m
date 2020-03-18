@@ -6,10 +6,11 @@ clear
 massa_ = [30 15 15];
 beta_ = [5 5 10];
 
+
 Vo_ = [-3, 3];
 Yo_ = 5;
 Yo = timeseries(Yo_);
-stop_time = 25;
+stop_time = 20;
 
 % settings da figura 1 - velocidade
 figure(1);clf; grid on; hold on;
@@ -29,10 +30,11 @@ for i = 1:3 % loop para cada par massa/beta
     
     massa = massa_(i);
     beta = beta_(i);
-
+    
     for j = 1:2 % loop para cada v0 (-3 ou 3 ms^(-1))
         Vo = timeseries(Vo_(j));
-        sim_out = sim('movimento'); % execução da simulaão via simulink
+        sim_out = sim('movimento','StartTime','0','StopTime',num2str(stop_time), ...
+            'FixedStep',num2str(stop_time/100)); % execução da simulaão via simulink
         % i+(j-1)*3 -- increase 1:6 troughout i and j
         % \/ desenho no primeiro plot - velocidade \/
         figure(1) % faz plot e guarda-o conjuntamente com as variáveis
@@ -42,6 +44,18 @@ for i = 1:3 % loop para cada par massa/beta
         figure(2) % faz plot e guarda-o conjuntamente com as variáveis
         plotHandlesY(i+(j-1)*3) = plot(sim_out.position.Time, sim_out.position.Data); 
         plotLabelsY{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s; \tau = m/\beta = ' num2str(massa/beta) 's'];
+        
+        %desafio aula
+        
+        figure(1); hold on; grid on;
+        v_teo = Vo_(j)*exp(-(beta/massa)*sim_out.tout);
+        plot(sim_out.tout, v_teo, '*');
+        
+        
+        figure(2); hold on; grid on;
+        y_teo = -(massa/beta)*Vo_(j)*exp(-(beta/massa)*sim_out.tout) + Yo_ + (massa/beta)*Vo_(j);
+        plot(sim_out.tout, y_teo, '*');
+        
     end
 end
 
