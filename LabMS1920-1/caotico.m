@@ -28,7 +28,7 @@ plot(sim_out.theta1.Data, sim_out.theta2.Data);
 figure(2);clf; grid on;
 title('Pendulo Duplo');xlabel('x');ylabel('y');
 
-% pontos característicos do pendulo duplo (a ser [muito] melhorado)
+% pontos caracterÃ­sticos do pendulo duplo (a ser [muito] melhorado)
 for i = 1:length(sim_out.tout)
     plot(l*sin(sim_out.theta1.Data(i)), -l*cos(sim_out.theta1.Data(i)), '*');
     hold on;

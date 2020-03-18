@@ -2,7 +2,7 @@
 clear
 
 
-% definiÁ„o das vari·veis
+% defini√ß√£o das vari√°veis
 massa_ = [30 15 15];
 beta_ = [5 5 10];
 
@@ -13,13 +13,13 @@ stop_time = 25;
 
 % settings da figura 1 - velocidade
 figure(1);clf; grid on; hold on;
-title('VariaÁ„o da velocidade (v) com o tempo (t)');xlabel('t [s]');ylabel('v(t) [m/s]');
+title('Varia√ß√£o da velocidade (v) com o tempo (t)');xlabel('t [s]');ylabel('v(t) [m/s]');
 
-% settings da figura 2 - posiÁ„o
+% settings da figura 2 - posi√ß√£o
 figure(2);clf; grid on; hold on;
-title('VariaÁ„o da posiÁ„o (y) com o tempo (t)');xlabel('t [s]');ylabel('y(t) [m]')
+title('Varia√£o da posi√ß√£o (y) com o tempo (t)');xlabel('t [s]');ylabel('y(t) [m]')
 
-% criaÁ„o dos arrays para alojar legendas e plots
+% cria√ß√£o dos arrays para alojar legendas e plots
 plotHandlesV = zeros(1,6);
 plotLabelsV = strings(1,6);
 plotHandlesY = zeros(1,6);
@@ -32,14 +32,14 @@ for i = 1:3 % loop para cada par massa/beta
 
     for j = 1:2 % loop para cada v0 (-3 ou 3 ms^(-1))
         Vo = timeseries(Vo_(j));
-        sim_out = sim('movimento'); % execuÁ„o da simulaÁ„o via simulink
+        sim_out = sim('movimento'); % execu√ß√£o da simula√£o via simulink
         % i+(j-1)*3 -- increase 1:6 troughout i and j
         % \/ desenho no primeiro plot - velocidade \/
-        figure(1) % faz plot e guarda-o conjuntamente com as vari·veis
+        figure(1) % faz plot e guarda-o conjuntamente com as vari√°veis
         plotHandlesV(i+(j-1)*3) = plot(sim_out.tout, sim_out.velocity);
         plotLabelsV{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s; \tau = m/\beta = ' num2str(massa/beta) 's'];
-        % \/ desenho no segundo plot - posiÁ„o \/
-        figure(2) % faz plot e guarda-o conjuntamente com as vari·veis
+        % \/ desenho no segundo plot - posi√ß√£o \/
+        figure(2) % faz plot e guarda-o conjuntamente com as vari√°veis
         plotHandlesY(i+(j-1)*3) = plot(sim_out.position.Time, sim_out.position.Data); 
         plotLabelsY{i+(j-1)*3}=['massa = ' num2str(massa) 'Kg; coef. atrito = ' num2str(beta) 'Nm/s; \tau = m/\beta = ' num2str(massa/beta) 's'];
     end
