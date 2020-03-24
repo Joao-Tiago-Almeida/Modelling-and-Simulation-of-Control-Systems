@@ -5,8 +5,6 @@ clear
 % definição das variáveis
 massa_ = [30 15 15];
 beta_ = [5 5 10];
-
-
 Vo_ = [-3, 3];
 Yo_ = 5;
 Yo = timeseries(Yo_);
@@ -18,7 +16,7 @@ title('Variação da velocidade (v) com o tempo (t)');xlabel('t [s]');ylabel('v(
 
 % settings da figura 2 - posição
 figure(2);clf; grid on; hold on;
-title('Variaão da posição (y) com o tempo (t)');xlabel('t [s]');ylabel('y(t) [m]')
+title('Variação da posição (y) com o tempo (t)');xlabel('t [s]');ylabel('y(t) [m]');
 
 % criação dos arrays para alojar legendas e plots
 plotHandlesV = zeros(1,6);
