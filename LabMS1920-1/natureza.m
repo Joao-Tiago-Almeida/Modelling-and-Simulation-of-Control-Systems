@@ -1,15 +1,12 @@
-%delete all variables
-clear
-
 % definição das variáveis
 alfa1 = 1;
-alfa2 = 1;
+global alfa2;  alfa2 = 1;
 delta_1 = [1 -1 -1];
 delta_2 = [1 1 -2];
 N1_o = 5;
 N2_o = 1;
 N1o = timeseries(N1_o);
-N2o = timeseries(N2_o);
+global N2o; N2o = timeseries(N2_o);
 stop_time = 20;
 fig=1; %first figure of the file
 
@@ -82,12 +79,12 @@ delta1 = 3.1;
 alfa1 = 1.4;
 N1o = timeseries(4);
 
-load('presas.mat');
+global yr;global tr;load('presas.mat');
 
 %parâmetros da formula dos predadores
 delta2 = -1.5;
-clear alfa2; global alfa2; alfa2 = 0.7;
-clear N2o; global N2o; N2o = timeseries(1.6);
+alfa2 = 0.7;
+N2o = timeseries(1.6);
 
 sim_out = sim('modelo','StartTime','0','StopTime',num2str(stop_time));
 
@@ -97,15 +94,41 @@ plot(sim_out.tout,sim_out.N1);
 legend('pressas.mat','aproximação');
 
 axis([0 4 0 5])
-x = linspace(1.5,1.7,20);
-y = linspace(0.6,0.8,20);
-z = meshgrid(x);
-for i = 1:length(x)
-    for j = 1:length(y)
-        z(j,i) = erro([x(i), y(j)],yr);
+close 100 1 2 3 101
+
+
+if exist('z_graph','var') ~= 1
+    x = linspace(1.5,1.7,40);y = linspace(0.6,0.8,40);z_graph = meshgrid(x,y);
+    total=length(x)*length(y);counter=1;
+    for i = 1:length(x)
+        for j = 1:length(y)
+            z_graph(j,i) = erro([x(i), y(j)]);
+            w = waitbar(counter/total);counter=counter+1;
+        end
     end
+    w.delete;%close waitbar window
 end
 figure();
-surfc(x,y,z);
+surfc(x,y,z_graph);colorbar;colormap(summer);shading flat ;%draw 3D plot
+xlabel('N(0)');ylabel('alfa2');
+zlabel({'máximo valor absoluto das diferenças entre os valores';...
+            'monitorizados e os correspondentes valores calculados'})
+sgtitle({'Estudo da dimensão da população N(0) e o coefieciente \alpha que reflecte';...
+            'o efeito das presas na abundância de predadores'})
+        
+        
+xx = linspace(1.5,1.7,3);yy = linspace(0.6,0.8,3);
+total=length(xx)*length(yy);counter=1;
+z__unc=zeros(length(xx)*length(yy),2);
+z_search=zeros(length(xx)*length(yy),2);
+val = zeros(1,length(xx)*length(yy));
+for i = 1:length(xx)
+    for j = 1:length(yy)
+        %z__unc((i-1)*length(yy)+j,:) = fminunc(@erro,[xx(i), yy(j)]);
+        z_search((i-1)*length(yy)+j,:) = fminsearch(@erro,[xx(i), yy(j)]);
+        val(1,(i-1)*length(yy)+j) = erro(z_search((i-1)*j+j,:));
+        w = waitbar(counter/total);counter=counter+1;
+    end
+end
+ w.delete;%close waitbar window
 
-close 100 1 2 3 101
