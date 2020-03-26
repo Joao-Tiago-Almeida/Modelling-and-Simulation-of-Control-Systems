@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.4"
+    ComputedModelVersion    "1.5"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -76,8 +76,8 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1790.0, 700.0]
 	ZoomFactor		[1.0]
-	Offset			[0.0, 62.924997508525848]
-	SceneRectInView		[0.0, 62.924997508525848, 1193.3333333333333, 466.66666666666669]
+	Offset			[0.0, 62.924997508525877]
+	SceneRectInView		[0.0, 62.924997508525877, 1193.3333333333333, 466.66666666666669]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -97,11 +97,11 @@ Model {
       WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAAB+PwCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
       "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAACTAAf//wAAAAEAAAExAAADCPwCA"
-      "AAAAvsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAAAUwD////7/////wAAAAC1AAADCAAAAMQA////AAAHNgAAAwgAAAABAAAAAgAAAAEAAAAC/AAAAAMAAAAAAAAAA"
-      "QAAADYAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEwAZQBmAHQDAAAAAP////8AAAAAAAAAAAAAAAEAAAABA"
-      "AAAOABjAG8AbABsAGEAcABzAGkAYgBsAGUAUABhAG4AZQBsAFQAbwBvAGwAQgBhAHIAUgBpAGcAaAB0AwAAAAD/////AAAAAAAAAAAAAAADAAAAA"
-      "QAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAbwB0AHQAbwBtAAAAAAD/////AAAAAAAAAAA="
+      "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
+      "QBjAHQAbwByAAAAAAD/////AAAAUwD///8AAAc2AAADCAAAAAEAAAACAAAAAQAAAAL8AAAAAwAAAAAAAAABAAAANgBjAG8AbABsAGEAcABzAGkAY"
+      "gBsAGUAUABhAG4AZQBsAFQAbwBvAGwAQgBhAHIATABlAGYAdAMAAAAA/////wAAAAAAAAAAAAAAAQAAAAEAAAA4AGMAbwBsAGwAYQBwAHMAaQBiA"
+      "GwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBSAGkAZwBoAHQDAAAAAP////8AAAAAAAAAAAAAAAMAAAABAAAAOgBjAG8AbABsAGEAcABzAGkAY"
+      "gBsAGUAUABhAG4AZQBsAFQAbwBvAGwAQgBhAHIAQgBvAHQAdABvAG0AAAAAAP////8AAAAAAAAAAA=="
       Array {
 	Type			"Cell"
 	Dimension		0
@@ -118,9 +118,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Daniel"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Mar 18 01:03:21 2020"
-  RTWModifiedTimeStamp	  506374771
-  ModelVersionFormat	  "1.%<AutoIncrement:4>"
+  LastModifiedDate	  "Thu Mar 26 02:11:36 2020"
+  RTWModifiedTimeStamp	  507076084
+  ModelVersionFormat	  "1.%<AutoIncrement:5>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -183,7 +183,7 @@ Model {
     $ObjectID		    7
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "pendulo"
-    overrideMode_	    [0U]
+    overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
@@ -253,7 +253,7 @@ Model {
 	  MaxStep		  "auto"
 	  MinStep		  "auto"
 	  MaxConsecutiveMinStep	  "1"
-	  RelTol		  "1e-3"
+	  RelTol		  "1e-6"
 	  EnableMultiTasking	  off
 	  ConcurrentTasks	  off
 	  Solver		  "VariableStepAuto"
@@ -263,7 +263,7 @@ Model {
 	  ZeroCrossControl	  "UseLocalSettings"
 	  ZeroCrossAlgorithm	  "Nonadaptive"
 	  AlgebraicLoopSolver	  "TrustRegion"
-	  SolverInfoToggleStatus  off
+	  SolverInfoToggleStatus  on
 	  IsAutoAppliedInSIP	  off
 	  SolverResetMethod	  "Fast"
 	  PositivePriorityOrder	  off
@@ -948,7 +948,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition    [ 145, 177, 1135, 847 ]
+      ConfigPrmDlgPosition    [ 71, 71, 1061, 651 ]
       ExtraOptions	      ""
     }
     PropName		    "ConfigurationSets"
@@ -1391,7 +1391,6 @@ Model {
       Points		      [44, 0]
       Branch {
 	ZOrder			29
-	Points			[16, 0]
 	DstBlock		"Integrator"
 	DstPort			1
       }
@@ -1436,7 +1435,6 @@ Model {
       Points		      [46, 0]
       Branch {
 	ZOrder			30
-	Points			[14, 0]
 	DstBlock		"Integrator1"
 	DstPort			1
       }
