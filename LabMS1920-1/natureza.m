@@ -1,66 +1,47 @@
 % definição das variáveis
-alfa1 = 1;
-global alfa2;  alfa2 = 1;
-delta_1 = [1 -1 -1];
-delta_2 = [1 1 -2];
-N1_o = 5;
-N2_o = 1;
-N1o = timeseries(N1_o);
-global N2o; N2o = timeseries(N2_o);
+delta_1 = [1 -1 -1];                    alfa1 = 1;  N1_o = 5;               N1o = timeseries(N1_o);
+delta_2 = [1 1 -2];     global alfa2;   alfa2 = 1;  N2_o = 1;   global N2o; N2o = timeseries(N2_o);
 stop_time = 20;
 fig=1; %first figure of the file
 
-% criação dos arrays para alojar legendas e plots
-plotLabelsRe = strings(1,3);
+plotLabelsRe = strings(1,3);    % criação dos arrays para alojar legendas e plots
 
-%legendas com a explicação de cada caso
-plotLabelsRe{1} = ['Fruto de outras relações ecológicas, a espécie predadadora ' ...
-                   'tem tendência a aumentar independentemente do nível de '...
-                   'abundância da presa. Assim o nível de abundância dos '...
-                   'predadores tende para valores muito grandes, levando à '...
-                   'extinção da população das presas.'];
-plotLabelsRe{2} = ['Situação idêntica à anterior. Caso particular que as '...
-                   'presas têm tendência natural a desaparecerem (independente '...
-                   'da relação ecológica em estudo), logo a sua extinção '...
-                   'acontece mais rápido, implicando assim um crescimento '...
-                   'menos rápido dos predadores'];
-plotLabelsRe{3} = ['Ambas as espécies têm tendência natural a extinguirem-se '...
-                   '(taxa de mortalidade superior à taxa de natalidade). '...
-                   'Realça-se que ao contrário da população das presas que '...
-                   'decresce estritamente até à sua extinção, os predadores '...
-                   'podem aumentar consoante a abundância inicial das presas. '...
-                   'O caso (1) anterior corresponde à situação em que o módulo da '...
-                   'diferença entre as taxas de natalidade e de mortalidade '...
-                   'da espécie perdadora é menor que o nível da abundância '...
-                   'inicial das presas, dN2/dt = N2(delta2+N1) .'...
-                   'No caso contrário (2) ( |delta2|<N1o ), a população das presas '...
-                   'tem um decrescimento estrito.'];
+%legendas com a explicação das diferentes soluções não oscilatórias
+plotLabelsRe{1} = ['Fruto de outras relações ecológicas, a espécie predadadora tem tendência a aumentar independentemente do nível de abundância da presa. '...
+                   'Assim o nível de abundância dos predadores tende para valores muito grandes, levando à extinção da população das presas.'];
+plotLabelsRe{2} = ['Situação idêntica à anterior. Caso particular que as presas têm tendência natural a desaparecerem (independente da relação ecológica em'...
+                   ' estudo), logo a sua extinção acontece mais rápido, implicando assim um crescimento menos rápido dos predadores'];
+plotLabelsRe{3} = ['Ambas as espécies têm tendência natural a extinguirem-se (taxa de mortalidade superior à taxa de natalidade). '...
+                   'Realça-se que ao contrário da população das presas que decresce estritamente até à sua extinção, os predadores '...
+                   'podem aumentar consoante a abundância inicial das presas. O caso (1) anterior corresponde à situação em que o módulo da '...
+                   'diferença entre as taxas de natalidade e de mortalidade da espécie perdadora é menor que o nível da abundância '...
+                   'inicial das presas, dN2/dt = N2(delta2+N1) .No caso contrário (2) ( |delta2|<N1o ), a população das presas tem um decrescimento estrito.'];
 
 
-dim = [[0.37 0.73 0.5 0.16]; [0.37 0.73 0.5 0.16]; [0.27 0.61 0.60 0.28]];
+dim = [[0.37 0.73 0.5 0.16]; [0.37 0.73 0.5 0.16]; [0.27 0.61 0.60 0.28]];  %dimensão e posição das caixas de texto
 
-for i = 1:3
-    delta1=delta_1(i); delta2=delta_2(i);
-    sim_out = sim('modelo','StartTime','0','StopTime','2');
-    figure(fig); clf; fig=fig+1; hold on; grid on;
+for i = 1:3                                                                     %gráficos das soluções não oscilatórias
+    delta1=delta_1(i); delta2=delta_2(i);                                       %atualização dos parametros da nova soluções
+    sim_out = sim('modelo','StartTime','0','StopTime','2');                     %simulação
+    figure(fig); clf; fig=fig+1; hold on; grid on;                              
     plot(sim_out.tout,sim_out.N1,sim_out.tout,sim_out.N2);
-    axis([0 2 -1 5]);
-    annotation('textbox', dim(i,1:4), 'String', plotLabelsRe{i});
+    axis([0 2 -1 5]);                                                           %restrição da dimensão da soluação a apresentar
+    annotation('textbox', dim(i,1:4), 'String', plotLabelsRe{i});               %explicação
     legend('Presas', 'Predadores', 'Location', 'east');
-    if i == 3
+    if i == 3                                                                   %caso espefício de uma solução 
         delta2_aux = delta2;
         delta2 = delta2-N1_o;
         sim_out = sim('modelo','StartTime','0','StopTime',num2str(stop_time));
         plot(sim_out.tout,sim_out.N2);
         legend('Presas', 'Predadores, caso 1', 'Predadores caso 2', 'Location', 'east');
-        title(['Relação ecológica.   delta1 = ' num2str(delta1) ';    (caso 1)delta2 = '...
+        sgtitle(['Relação ecológica.   delta1 = ' num2str(delta1) ';    (caso 1)delta2 = '...
             num2str(delta2_aux) ';    (caso 2)delta2 = ' num2str(delta2)]);
     else
-        title(['Relação ecológica.   delta1 = ' num2str(delta1) ';    delta2 = ' num2str(delta2)]);
+        sgtitle(['Relação ecológica.   delta1 = ' num2str(delta1) ';    delta2 = ' num2str(delta2)]);
     end
 end
 
-
+finish
        
 
 %modo (N1, N2)
@@ -94,7 +75,7 @@ plot(sim_out.tout,sim_out.N1);
 legend('pressas.mat','aproximação');
 
 axis([0 4 0 5])
-close 100 1 2 3 101
+
 
 
 if exist('z_graph','var') ~= 1
@@ -135,7 +116,6 @@ if exist('val','var') ~= 1
     w.delete;%close waitbar window
 end
 
-close all
 [min_value,index]=min(val);
 aux = fminsearch(@erro,z_search(index,:)); N2o = timeseries(aux(1)); alfa2 = aux(2);
 sim_out = sim('modelo','StartTime','0','StopTime',num2str(stop_time));
