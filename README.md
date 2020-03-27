@@ -16,6 +16,9 @@ $ git push origin <branchname>
 
 $ git add –A
 $ git commit –m "Some commit message"
+ou
+$ git commit –am "Some commit message"
+
 $ git checkout master
 $ git merge new-branch
 ```
