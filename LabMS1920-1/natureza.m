@@ -115,20 +115,29 @@ zlabel({'máximo valor absoluto das diferenças entre os valores';...
             'monitorizados e os correspondentes valores calculados'})
 sgtitle({'Estudo da dimensão da população N(0) e o coefieciente \alpha que reflecte';...
             'o efeito das presas na abundância de predadores'})
+figure();
+surfc(x,y,log10(z_graph));colorbar;colormap(hot);shading flat ;%draw
         
-        
-xx = linspace(1.5,1.7,3);yy = linspace(0.6,0.8,3);
-total=length(xx)*length(yy);counter=1;
-z__unc=zeros(length(xx)*length(yy),2);
-z_search=zeros(length(xx)*length(yy),2);
-val = zeros(1,length(xx)*length(yy));
-for i = 1:length(xx)
-    for j = 1:length(yy)
-        %z__unc((i-1)*length(yy)+j,:) = fminunc(@erro,[xx(i), yy(j)]);
-        z_search((i-1)*length(yy)+j,:) = fminsearch(@erro,[xx(i), yy(j)]);
-        val(1,(i-1)*length(yy)+j) = erro(z_search((i-1)*j+j,:));
-        w = waitbar(counter/total);counter=counter+1;
+if exist('val','var') ~= 1
+    xx = linspace(1.5,1.7,3);yy = linspace(0.6,0.8,3);
+    total=length(xx)*length(yy);counter=1;
+    z__unc=zeros(length(xx)*length(yy),2);
+    z_search=zeros(length(xx)*length(yy),2);
+    val = zeros(1,length(xx)*length(yy));
+    for i = 1:length(xx)
+        for j = 1:length(yy)
+            %z__unc((i-1)*length(yy)+j,:) = fminunc(@erro,[xx(i), yy(j)]);
+            z_search((i-1)*length(yy)+j,:) = fminsearch(@erro,[xx(i), yy(j)]);
+            val(1,(i-1)*length(yy)+j) = erro(z_search((i-1)*j+j,:));
+            w = waitbar(counter/total);counter=counter+1;
+        end
     end
+    w.delete;%close waitbar window
 end
- w.delete;%close waitbar window
 
+close all
+[min_value,index]=min(val);
+aux = fminsearch(@erro,z_search(index,:)); N2o = timeseries(aux(1)); alfa2 = aux(2);
+sim_out = sim('modelo','StartTime','0','StopTime',num2str(stop_time));
+figure(); hold on;
+plot(tr, yr, 'o',sim_out.tout, sim_out.N1);
