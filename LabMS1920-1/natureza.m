@@ -27,22 +27,49 @@ for i = 1:3                                                                     
     plot(sim_out.tout,sim_out.N1,sim_out.tout,sim_out.N2);
     axis([0 2 -1 5]);                                                           %restrição da dimensão da soluação a apresentar
     annotation('textbox', dim(i,1:4), 'String', plotLabelsRe{i});               %explicação
-    legend('Presas', 'Predadores', 'Location', 'east');
     if i == 3                                                                   %caso espefício de uma solução 
         delta2_aux = delta2;
         delta2 = delta2-N1_o;
         sim_out = sim('modelo','StartTime','0','StopTime',num2str(stop_time));
         plot(sim_out.tout,sim_out.N2);
         legend('Presas', 'Predadores, caso 1', 'Predadores caso 2', 'Location', 'east');
-        sgtitle(['Relação ecológica.   delta1 = ' num2str(delta1) ';    (caso 1)delta2 = '...
-            num2str(delta2_aux) ';    (caso 2)delta2 = ' num2str(delta2)]);
+        sgtitle(['Relação ecológica.   delta1 = ' num2str(delta1) ';    (caso 1)delta2 = ' num2str(delta2_aux) ';    (caso 2)delta2 = ' num2str(delta2)]);
+        legend('Presas', 'Predadores', 'Location', 'east');
     else
         sgtitle(['Relação ecológica.   delta1 = ' num2str(delta1) ';    delta2 = ' num2str(delta2)]);
+        legend('Presas', 'Predadores', 'Location', 'east');
     end
 end
 
+close 1 2 3
+
+delta_1 = [3 1 3];       N1_o = [4 3 2];
+delta_2 = [-3 -3 -1];    N2_o = [4 5 1];
+c=['#D95319'; '#0072BD'; '#77AC30'];
+plotHandles = zeros(1,2*(length(delta_1)+1));
+plotLabels = strings(1,2*(length(delta_1)+1));
+d_max=length(delta_1); n_max = length(N1_o);
+for d = 1:d_max
+    delta1 = delta_1(d); delta2 = delta_2(d);
+    figure(fig); clf; fig=fig+1; hold on; grid on;
+    sgtitle(['Relação ecológica.   delta1 = ' num2str(delta1) ';    delta2 = ' num2str(delta2)]);
+    for n = 1:n_max
+        N1o = timeseries(N1_o(n)); N2o = timeseries(N2_o(n));
+        sim_out = sim('modelo','StartTime','0','StopTime','stop_time/2');                     %simulação  
+        p = plot(sim_out.tout,sim_out.N1, '--',sim_out.tout,sim_out.N2); plotHandles(2*n-1:2*n) = p;
+        p(1).Color = c(n,:); p(2).Color = c(n,:); p(1).LineWidth = 2; p(2).LineWidth = 2;
+        plotLabels(2*n-1:2*n) = {['Presas N(0) = ' num2str(N1_o(n))], ['Predadores  N(0) = ' num2str(N2_o(n))]};       
+    end
+    N1o = timeseries(-delta2/alfa2); N2o = timeseries(delta1/alfa1);
+    sim_out = sim('modelo','StartTime','0','StopTime','stop_time/2');                     %simulação
+    p = plot(sim_out.tout,sim_out.N1, '--',sim_out.tout,sim_out.N2); plotHandles(2*n+1:2*n+2) = p;
+    p(1).Color = '#7E2F8E'; p(2).Color = '#7E2F8E'; p(1).LineWidth = 2; p(2).LineWidth = 2;
+    plotLabels(2*n+1:2*n+2) = {['Presas N(0) = \delta/\alpha = ' num2str(-delta2/alfa2)], ['Predadores  N(0) = \delta/\alpha = ' num2str(delta1/alfa1)]};
+    l = legend(plotHandles, plotLabels, 'Location', 'best');
+    l.NumColumns = 2;
+end
+
 finish
-       
 
 %modo (N1, N2)
 figure(100); hold on; axis([-1 12 -1 12])
@@ -92,10 +119,8 @@ end
 figure();
 surfc(x,y,z_graph);colorbar;colormap(summer);shading flat ;%draw 3D plot
 xlabel('N(0)');ylabel('alfa2');
-zlabel({'máximo valor absoluto das diferenças entre os valores';...
-            'monitorizados e os correspondentes valores calculados'})
-sgtitle({'Estudo da dimensão da população N(0) e o coefieciente \alpha que reflecte';...
-            'o efeito das presas na abundância de predadores'})
+zlabel({'máximo valor absoluto das diferenças entre os valores'; 'monitorizados e os correspondentes valores calculados'})
+sgtitle({'Estudo da dimensão da população N(0) e o coefieciente \alpha que reflecte'; 'o efeito das presas na abundância de predadores'})
 figure();
 surfc(x,y,log10(z_graph));colorbar;colormap(hot);shading flat ;%draw
         
