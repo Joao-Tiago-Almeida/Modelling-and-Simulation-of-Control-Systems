@@ -69,9 +69,10 @@ for d = 1:d_max
     l.NumColumns = 2;
 end
 
-finish
+close 4 5 6
 
 %modo (N1, N2)
+delta1 = 1; delta2 = -1;
 figure(100); hold on; axis([-1 12 -1 12])
 for i = [3 5]
     for j = [2 8]
@@ -81,6 +82,14 @@ for i = [3 5]
         plot(sim_out.N1, sim_out.N2);
     end
 end
+
+close 100 
+
+figure(111); hold on;
+[n1,n2]=meshgrid(-1:0.5:6, -1:0.5:6); dn1= delta1.*n1-alfa1.*n1.*n2; dn2= delta2.*n2+alfa2.*n1.*n2;
+q = quiver(n1, n2, dn1, dn2); q.Color = '#A2142F'; q.LineWidth = 1;
+
+finish
 
 %2.4-resultados próximos dos reais
 delta1 = 3.1;
