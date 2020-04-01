@@ -22,26 +22,30 @@ dim = [[0.37 0.73 0.5 0.16]; [0.37 0.73 0.5 0.16]; [0.27 0.61 0.60 0.28]];  %dim
 
 for i = 1:3                                                                     %gráficos das soluções não oscilatórias
     delta1=delta_1(i); delta2=delta_2(i);                                       %atualização dos parametros da nova soluções
-    sim_out = sim('modelo','StartTime','0','StopTime','2');                     %simulação
-    figure(fig); clf; fig=fig+1; hold on; grid on;                              
-    plot(sim_out.tout,sim_out.N1,sim_out.tout,sim_out.N2);
-    axis([0 2 -1 5]);                                                           %restrição da dimensão da soluação a apresentar
+    sim_out = sim('modelo','StartTime','0','StopTime',num2str(4));                     %simulação
+    figure(fig); clf; fig=fig+1; hold on; grid on; ylim([0 inf]);
+    if i < 3
+        yyaxis left;
+        plot(sim_out.tout,sim_out.N1);
+        yyaxis right;
+        plot(sim_out.tout,sim_out.N2);
+    end                                                          %restrição da dimensão da soluação a apresentar
     annotation('textbox', dim(i,1:4), 'String', plotLabelsRe{i});               %explicação
-    if i == 3                                                                   %caso espefício de uma solução 
+    if i == 3                                                                   %caso espefício de uma solução
+        plot(sim_out.tout,sim_out.N1,sim_out.tout,sim_out.N2);
         delta2_aux = delta2;
         delta2 = delta2-N1_o;
-        sim_out = sim('modelo','StartTime','0','StopTime',num2str(stop_time));
+        sim_out = sim('modelo','StartTime','0','StopTime',num2str(4));
         plot(sim_out.tout,sim_out.N2);
         legend('Presas', 'Predadores, caso 1', 'Predadores caso 2', 'Location', 'east');
         sgtitle(['Relação ecológica.   delta1 = ' num2str(delta1) ';    (caso 1)delta2 = ' num2str(delta2_aux) ';    (caso 2)delta2 = ' num2str(delta2)]);
-        legend('Presas', 'Predadores', 'Location', 'east');
     else
         sgtitle(['Relação ecológica.   delta1 = ' num2str(delta1) ';    delta2 = ' num2str(delta2)]);
         legend('Presas', 'Predadores', 'Location', 'east');
     end
 end
 
-close 1 2 3
+finish
 
 delta_1 = [3 1 3];       N1_o = [4 3 2];
 delta_2 = [-3 -3 -1];    N2_o = [4 5 1];
@@ -69,11 +73,9 @@ for d = 1:d_max
     l.NumColumns = 2;
 end
 
-close 4 5 6
-
 %modo (N1, N2)
 delta1 = 1; delta2 = -1;
-figure(100); hold on; axis([-1 12 -1 12])
+figure(100); clf; hold on;
 for i = [3 5]
     for j = [2 8]
         N1o = timeseries(i);
@@ -83,13 +85,10 @@ for i = [3 5]
     end
 end
 
-close 100 
-
-figure(111); hold on;
-[n1,n2]=meshgrid(-1:0.5:6, -1:0.5:6); dn1= delta1.*n1-alfa1.*n1.*n2; dn2= delta2.*n2+alfa2.*n1.*n2;
+plot(sim_out.N1, sim_out.N2);
+[n1,n2]=meshgrid(-2:0.5:12, -2:0.5:12); dn1= delta1.*n1-alfa1.*n1.*n2; dn2= delta2.*n2+alfa2.*n1.*n2;
 q = quiver(n1, n2, dn1, dn2); q.Color = '#A2142F'; q.LineWidth = 1;
 
-finish
 
 %2.4-resultados próximos dos reais
 delta1 = 3.1;
@@ -112,10 +111,8 @@ legend('pressas.mat','aproximação');
 
 axis([0 4 0 5])
 
-
-
 if exist('z_graph','var') ~= 1
-    x = linspace(1.5,1.7,40);y = linspace(0.6,0.8,40);z_graph = meshgrid(x,y);
+    x = linspace(1.5,1.7,40);y = linspace(0.6,0.8,40);z_graph = zeros(length(x), length(y));
     total=length(x)*length(y);counter=1;
     for i = 1:length(x)
         for j = 1:length(y)
@@ -125,7 +122,16 @@ if exist('z_graph','var') ~= 1
     end
     w.delete;%close waitbar window
 end
-figure();
+
+%rever
+%n1(1:40,1:40)=4;N1o=timeseries(n1);
+%[n2,a2]=meshgrid(x,y);N2o=timeseries(n2);% alfa2=a2;
+%sim_out = sim('modelo','StartTime','0','FixedStep',num2str(0.1),'StopTime',num2str(stop_time));
+%ee = sim_out.N1-yr;
+%finish
+
+
+figure(24);
 surfc(x,y,z_graph);colorbar;colormap(summer);shading flat ;%draw 3D plot
 xlabel('N(0)');ylabel('alfa2');
 zlabel({'máximo valor absoluto das diferenças entre os valores'; 'monitorizados e os correspondentes valores calculados'})
@@ -155,3 +161,5 @@ aux = fminsearch(@erro,z_search(index,:)); N2o = timeseries(aux(1)); alfa2 = aux
 sim_out = sim('modelo','StartTime','0','StopTime',num2str(stop_time));
 figure(); hold on;
 plot(tr, yr, 'o',sim_out.tout, sim_out.N1);
+
+figure(7);figure(24);figure(101);figure(100);figure(6);figure(5);figure(4);figure(3);figure(2);figure(1);
