@@ -11,19 +11,18 @@
 %
 % Docente: Alexandre Bernardino
 
-%% Simulação do movimento livre de uma viatura - SIMULINK
+%% 1. Simulação do movimento livre de uma viatura - SIMULINK
 
 % workspace do SIMULINK
 movimento
-%% Questão 1.5
+%% Questão 1.5 - Simulação das equações diferenciais
 % A constante de tempo $(\tau)$, é defenida como sendo o tempo que o
 % sistema demora a alcançar 63,2\% de resposta estabilizada correspondente
 % ao estímulo da função degrau u(t). Na situação do movimento livre da
 % viatura $\tau = \frac{m}{\beta} [s]$.
 
 % delete all variables
-clear
-close all
+clear; close all
 
 % definição das variáveis
 massa_ = [50 15 15];
@@ -102,7 +101,6 @@ elpsy = annotation('ellipse',[0.1 .49 .05 .05]);
 tay = annotation('textarrow', [0.25 0.15], [0.52 0.52]);
 tay.String = 'yo';
 
-close_system
 %%
 % Sobrepôs-se aos gráficos simulados, os gráficos gerados apartir das
 % equações do movimento do carro, obtidas analiticamente:
@@ -117,3 +115,6 @@ close_system
 % é a imobilização do corpo. Fica assim claro que tal como previsto
 % anteriormente, a constante de tempo está porporcionalmente relacionada com o
 % tempo de imbolização do veículo.
+
+%%
+close_system
