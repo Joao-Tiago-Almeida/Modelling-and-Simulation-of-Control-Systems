@@ -1,12 +1,12 @@
 Model {
   Name			  "pendulo"
-  Version		  10.0
+  Version		  10.1
   SavedCharacterEncoding  "windows-1252"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.5"
+    ComputedModelVersion    "1.7"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -23,9 +23,9 @@ Model {
     OrderedModelArguments   1
   }
   DiagnosticSuppressor	  "on"
+  AnimationPlugin	  "on"
   LogicAnalyzerPlugin	  "on"
   SLCCPlugin		  "on"
-  AnimationPlugin	  "on"
   WebScopes_FoundationPlugin "on"
   NotesPlugin		  "on"
   EnableAccessToBaseWorkspace on
@@ -76,8 +76,8 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1790.0, 700.0]
 	ZoomFactor		[1.0]
-	Offset			[0.0, 62.924997508525877]
-	SceneRectInView		[0.0, 62.924997508525877, 1193.3333333333333, 466.66666666666669]
+	Offset			[-1.4999999999994316, 62.036108619636963]
+	SceneRectInView		[-1.4999999999994316, 62.036108619636963, 1193.3333333333333, 466.66666666666669]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -96,9 +96,9 @@ Model {
       }
       WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAAB+PwCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
-      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAACTAAf//wAAAAEAAAExAAADCPwCA"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAACTAP///wAAAAEAAAExAAADCPwCA"
       "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAAAUwD///8AAAc2AAADCAAAAAEAAAACAAAAAQAAAAL8AAAAAwAAAAAAAAABAAAANgBjAG8AbABsAGEAcABzAGkAY"
+      "QBjAHQAbwByAAAAAAD/////AAACgAD///8AAAc2AAADCAAAAAEAAAACAAAAAQAAAAL8AAAAAwAAAAAAAAABAAAANgBjAG8AbABsAGEAcABzAGkAY"
       "gBsAGUAUABhAG4AZQBsAFQAbwBvAGwAQgBhAHIATABlAGYAdAMAAAAA/////wAAAAAAAAAAAAAAAQAAAAEAAAA4AGMAbwBsAGwAYQBwAHMAaQBiA"
       "GwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBSAGkAZwBoAHQDAAAAAP////8AAAAAAAAAAAAAAAMAAAABAAAAOgBjAG8AbABsAGEAcABzAGkAY"
       "gBsAGUAUABhAG4AZQBsAFQAbwBvAGwAQgBhAHIAQgBvAHQAdABvAG0AAAAAAP////8AAAAAAAAAAA=="
@@ -118,9 +118,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Daniel"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Mar 26 02:11:36 2020"
-  RTWModifiedTimeStamp	  507076084
-  ModelVersionFormat	  "1.%<AutoIncrement:5>"
+  LastModifiedDate	  "Fri Apr 10 22:56:56 2020"
+  RTWModifiedTimeStamp	  508460212
+  ModelVersionFormat	  "1.%<AutoIncrement:7>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -142,8 +142,6 @@ Model {
   ShowViewerIcons	  on
   SortedOrder		  off
   VariantCondition	  off
-  ShowSubsystemDomainSpec off
-  ExecutionContextIcon	  off
   ShowLinearizationAnnotations on
   ShowVisualizeInsertedRTB on
   ShowMarkup		  on
@@ -156,7 +154,7 @@ Model {
   BrowserShowLibraryLinks off
   FunctionConnectors	  off
   BrowserLookUnderMasks	  off
-  MultiThreadCoSim	  on
+  MultiThreadCoSim	  "on"
   SimulationMode	  "normal"
   SILPILModeSetting	  "automated"
   SILPILSystemUnderTest	  "topmodel"
@@ -226,7 +224,7 @@ Model {
     Dimension		    1
     Simulink.ConfigSet {
       $ObjectID		      8
-      Version		      "19.1.1"
+      Version		      "20.0.1"
       DisabledProps	      []
       Description	      ""
       Array {
@@ -234,7 +232,7 @@ Model {
 	Dimension		9
 	Simulink.SolverCC {
 	  $ObjectID		  9
-	  Version		  "19.1.1"
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -273,11 +271,11 @@ Model {
 	  SampleTimeProperty	  []
 	  DecoupledContinuousIntegration off
 	  MinimalZcImpactIntegration off
-	  SolverOrder		  3
+	  ODENIntegrationMethod	  "ode3"
 	}
 	Simulink.DataIOCC {
 	  $ObjectID		  10
-	  Version		  "19.1.1"
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -319,7 +317,7 @@ Model {
 	}
 	Simulink.OptimizationCC {
 	  $ObjectID		  11
-	  Version		  "19.1.1"
+	  Version		  "20.0.1"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    9
@@ -356,6 +354,7 @@ Model {
 	  ExpressionFolding	  on
 	  BooleansAsBitfields	  off
 	  BitfieldContainerType	  "uint_T"
+	  BitwiseOrLogicalOp	  "Same as modeled"
 	  EnableMemcpy		  on
 	  MemcpyThreshold	  64
 	  PassReuseOutputArgsAs	  "Structure reference"
@@ -392,7 +391,7 @@ Model {
 	}
 	Simulink.DebuggingCC {
 	  $ObjectID		  12
-	  Version		  "19.1.1"
+	  Version		  "20.0.1"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    1
@@ -449,7 +448,6 @@ Model {
 	  UnderSpecifiedDataTypeMsg "none"
 	  UnnecessaryDatatypeConvMsg "none"
 	  VectorMatrixConversionMsg "none"
-	  InvalidFcnCallConnMsg	  "error"
 	  FcnCallInpInsideContextMsg "error"
 	  SignalLabelMismatchMsg  "none"
 	  UnconnectedInputMsg	  "warning"
@@ -514,7 +512,7 @@ Model {
 	}
 	Simulink.HardwareCC {
 	  $ObjectID		  13
-	  Version		  "19.1.1"
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -564,7 +562,7 @@ Model {
 	}
 	Simulink.ModelReferenceCC {
 	  $ObjectID		  14
-	  Version		  "19.1.1"
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -584,7 +582,7 @@ Model {
 	}
 	Simulink.SFSimCC {
 	  $ObjectID		  15
-	  Version		  "19.1.1"
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -619,7 +617,7 @@ Model {
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
 	  $ObjectID		  16
-	  Version		  "19.1.1"
+	  Version		  "20.0.1"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    16
@@ -708,7 +706,7 @@ Model {
 	    Dimension		    2
 	    Simulink.CodeAppCC {
 	      $ObjectID		      17
-	      Version		      "19.1.1"
+	      Version		      "20.0.1"
 	      Array {
 		Type			"Cell"
 		Dimension		28
@@ -798,7 +796,7 @@ Model {
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
 	      $ObjectID		      18
-	      Version		      "19.1.1"
+	      Version		      "20.0.1"
 	      Array {
 		Type			"Cell"
 		Dimension		16
@@ -842,7 +840,6 @@ Model {
 	      CompOptLevelCompliant   on
 	      ConcurrentExecutionCompliant on
 	      IncludeMdlTerminateFcn  on
-	      GeneratePreprocessorConditionals "Use local settings"
 	      CombineOutputUpdateFcns on
 	      CombineSignalStateStructs	off
 	      GroupInternalDataByFunction off
@@ -864,7 +861,6 @@ Model {
 	      SupportVariableSizeSignals off
 	      ParenthesesLevel	      "Nominal"
 	      CastingMode	      "Nominal"
-	      PreserveStateflowLocalDataDimensions off
 	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.GRTCustomization"
 	      ModelStepFunctionPrototypeControlCompliant off
 	      CPPClassGenCompliant    on
@@ -905,7 +901,7 @@ Model {
 	}
 	SlCovCC.ConfigComp {
 	  $ObjectID		  19
-	  Version		  "19.1.1"
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  "Simulink Coverage Configuration Component"
 	  Components		  []
@@ -971,7 +967,7 @@ Model {
     ForegroundColor	    "black"
     BackgroundColor	    "white"
     DropShadow		    off
-    NamePlacement	    "normal"
+    NameLocation	    "bottom"
     FontName		    "Helvetica"
     FontSize		    10
     FontWeight		    "normal"
@@ -1028,15 +1024,6 @@ Model {
       BlockType		      Fcn
       Expr		      "sin(u[1])"
       SampleTime	      "-1"
-    }
-    Block {
-      BlockType		      FromWorkspace
-      VariableName	      "simulink_input"
-      OutDataTypeStr	      "Inherit: auto"
-      SampleTime	      "-1"
-      Interpolate	      on
-      ZeroCross		      off
-      OutputAfterFinalValue   "Extrapolation"
     }
     Block {
       BlockType		      Integrator
@@ -1109,7 +1096,7 @@ Model {
       BlockType		      Fcn
       Name		      "Fcn1"
       SID		      "5"
-      Position		      [510, 180, 570, 210]
+      Position		      [510, 190, 570, 220]
       ZOrder		      5
       BlockMirror	      on
       Expr		      "-0.5*m*(l^2)*(u(1)*u(4)*sin(u(2)-u(3))+3*(g/l)*sin(u(2)))"
@@ -1118,7 +1105,7 @@ Model {
       BlockType		      Fcn
       Name		      "Fcn2"
       SID		      "6"
-      Position		      [510, 260, 570, 290]
+      Position		      [510, 265, 570, 295]
       ZOrder		      6
       BlockMirror	      on
       Expr		      "-0.5*m*(l^2)*(-u(1)*u(4)*sin(u(2)-u(3))+(g/l)*sin(u(3)))"
@@ -1132,86 +1119,42 @@ Model {
       Expr		      "(6/(m*(l^2)))*((8*u(3)-3*cos(u(1)-u(4))*u(2))/(16-9*(cos(u(1)-u(4)))*(cos(u(1)-u(4)))))"
     }
     Block {
-      BlockType		      FromWorkspace
-      Name		      "From\nWorkspace"
-      SID		      "17"
-      Position		      [510, 303, 575, 327]
-      ZOrder		      17
-      BlockMirror	      on
-      VariableName	      "p2_0"
-      SampleTime	      "0"
-      ZeroCross		      on
-    }
-    Block {
-      BlockType		      FromWorkspace
-      Name		      "From\nWorkspace1"
-      SID		      "18"
-      Position		      [420, 428, 485, 452]
-      ZOrder		      18
-      VariableName	      "theta2_0"
-      SampleTime	      "0"
-      ZeroCross		      on
-    }
-    Block {
-      BlockType		      FromWorkspace
-      Name		      "From\nWorkspace2"
-      SID		      "19"
-      Position		      [420, 148, 485, 172]
-      ZOrder		      19
-      VariableName	      "theta1_0"
-      SampleTime	      "0"
-      ZeroCross		      on
-    }
-    Block {
-      BlockType		      FromWorkspace
-      Name		      "From\nWorkspace3"
-      SID		      "20"
-      Position		      [510, 223, 575, 247]
-      ZOrder		      20
-      BlockMirror	      on
-      VariableName	      "p1_0"
-      SampleTime	      "0"
-      ZeroCross		      on
-    }
-    Block {
       BlockType		      Integrator
       Name		      "Integrator"
       SID		      "1"
-      Ports		      [2, 1]
-      Position		      [560, 111, 590, 144]
+      Ports		      [1, 1]
+      Position		      [560, 113, 590, 147]
       ZOrder		      1
-      InitialConditionSource  "external"
       InitialCondition	      "theta1_0"
     }
     Block {
       BlockType		      Integrator
       Name		      "Integrator1"
       SID		      "2"
-      Ports		      [2, 1]
-      Position		      [560, 356, 590, 389]
+      Ports		      [1, 1]
+      Position		      [560, 358, 590, 392]
       ZOrder		      2
-      InitialConditionSource  "external"
       InitialCondition	      "theta2_0"
     }
     Block {
       BlockType		      Integrator
       Name		      "Integrator2"
       SID		      "10"
-      Ports		      [2, 1]
-      Position		      [420, 186, 450, 219]
+      Ports		      [1, 1]
+      Position		      [420, 188, 450, 222]
       ZOrder		      10
       BlockMirror	      on
-      InitialConditionSource  "external"
+      InitialCondition	      "p1_0"
     }
     Block {
       BlockType		      Integrator
       Name		      "Integrator3"
       SID		      "11"
-      Ports		      [2, 1]
-      Position		      [420, 266, 450, 299]
+      Ports		      [1, 1]
+      Position		      [420, 263, 450, 297]
       ZOrder		      11
       BlockMirror	      on
-      InitialConditionSource  "external"
+      InitialCondition	      "p2_0"
     }
     Block {
       BlockType		      Mux
@@ -1244,7 +1187,6 @@ Model {
       ZOrder		      12
       VariableName	      "theta1"
       MaxDataPoints	      "inf"
-      SaveFormat	      "Timeseries"
       FixptAsFi		      on
       SampleTime	      "-1"
     }
@@ -1253,12 +1195,11 @@ Model {
       Name		      "To Workspace1"
       SID		      "16"
       Ports		      [1]
-      Position		      [240, 160, 330, 190]
+      Position		      [240, 165, 330, 195]
       ZOrder		      16
       BlockMirror	      on
       VariableName	      "p1"
       MaxDataPoints	      "inf"
-      SaveFormat	      "Timeseries"
       FixptAsFi		      on
       SampleTime	      "-1"
     }
@@ -1271,7 +1212,6 @@ Model {
       ZOrder		      14
       VariableName	      "theta2"
       MaxDataPoints	      "inf"
-      SaveFormat	      "Timeseries"
       FixptAsFi		      on
       SampleTime	      "-1"
     }
@@ -1285,7 +1225,6 @@ Model {
       BlockMirror	      on
       VariableName	      "p2"
       MaxDataPoints	      "inf"
-      SaveFormat	      "Timeseries"
       FixptAsFi		      on
       SampleTime	      "-1"
     }
@@ -1296,13 +1235,13 @@ Model {
       Points		      [-32, 0]
       Branch {
 	ZOrder			4
-	Points			[0, 40]
+	Points			[0, 45]
 	DstBlock		"Fcn2"
 	DstPort			1
       }
       Branch {
 	ZOrder			3
-	Points			[0, -40]
+	Points			[0, -30]
 	DstBlock		"Fcn1"
 	DstPort			1
       }
@@ -1328,7 +1267,7 @@ Model {
       Points		      [-32, 0]
       Branch {
 	ZOrder			44
-	Points			[0, -30]
+	Points			[0, -25]
 	DstBlock		"To Workspace1"
 	DstPort			1
       }
@@ -1345,16 +1284,16 @@ Model {
       SrcPort		      1
       Points		      [-33, 0]
       Branch {
-	ZOrder			45
-	Points			[0, -50]
-	DstBlock		"Mux1"
-	DstPort			3
-      }
-      Branch {
-	ZOrder			39
-	Points			[0, 10]
+	ZOrder			73
+	Points			[0, 15]
 	DstBlock		"To Workspace3"
 	DstPort			1
+      }
+      Branch {
+	ZOrder			45
+	Points			[0, -45]
+	DstBlock		"Mux1"
+	DstPort			3
       }
     }
     Line {
@@ -1388,7 +1327,7 @@ Model {
       ZOrder		      10
       SrcBlock		      "Fcn"
       SrcPort		      1
-      Points		      [44, 0]
+      Points		      [44, 0; 0, 10]
       Branch {
 	ZOrder			29
 	DstBlock		"Integrator"
@@ -1396,7 +1335,7 @@ Model {
       }
       Branch {
 	ZOrder			28
-	Points			[0, 42; 160, 0; 0, 58]
+	Points			[0, 32; 160, 0; 0, 58]
 	DstBlock		"Mux"
 	DstPort			1
       }
@@ -1435,6 +1374,7 @@ Model {
       Points		      [46, 0]
       Branch {
 	ZOrder			30
+	Points			[0, 10]
 	DstBlock		"Integrator1"
 	DstPort			1
       }
@@ -1462,38 +1402,6 @@ Model {
 	DstBlock		"Fcn"
 	DstPort			1
       }
-    }
-    Line {
-      ZOrder		      50
-      SrcBlock		      "From\nWorkspace2"
-      SrcPort		      1
-      Points		      [17, 0; 0, -25]
-      DstBlock		      "Integrator"
-      DstPort		      2
-    }
-    Line {
-      ZOrder		      51
-      SrcBlock		      "From\nWorkspace1"
-      SrcPort		      1
-      Points		      [33, 0; 0, -60]
-      DstBlock		      "Integrator1"
-      DstPort		      2
-    }
-    Line {
-      ZOrder		      52
-      SrcBlock		      "From\nWorkspace"
-      SrcPort		      1
-      Points		      [-25, 0; 0, -25]
-      DstBlock		      "Integrator3"
-      DstPort		      2
-    }
-    Line {
-      ZOrder		      53
-      SrcBlock		      "From\nWorkspace3"
-      SrcPort		      1
-      Points		      [-25, 0; 0, -25]
-      DstBlock		      "Integrator2"
-      DstPort		      2
     }
   }
 }
