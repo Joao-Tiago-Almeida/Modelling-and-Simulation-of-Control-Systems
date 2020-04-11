@@ -17,11 +17,11 @@
 movimento
 %% Questão 1.5 - Simulação das equações diferenciais
 % A constante de tempo $(\tau)$, é defenida como sendo o tempo que o
-% sistema demora a alcançar 63,2\% de resposta estabilizada correspondente
+% sistema demora a alcançar 63,2% de resposta estabilizada correspondente
 % ao estímulo da função degrau u(t). Na situação do movimento livre da
 % viatura $\tau = \frac{m}{\beta} [s]$.
 
-% delete all variables
+% clear workspace and close all figures
 clear; close all
 
 % definição das variáveis
@@ -116,5 +116,5 @@ tay.String = 'yo';
 % anteriormente, a constante de tempo está porporcionalmente relacionada com o
 % tempo de imbolização do veículo.
 
-%%
+% close SIMULINK
 close_system
