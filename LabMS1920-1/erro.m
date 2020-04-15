@@ -1,11 +1,20 @@
 function e = erro(val)
 
-global N2o;     N2o = timeseries(val(1));
-global alfa2;   alfa2 = val(2);
+N2o = timeseries(val(1));
+alfa2 = val(2);
 global yr;
+samp_time = 0.1; %force to get {1x201} array
 
-s =  sim('modelo','StartTime','0','StopTime',num2str(20), ...
-    'FixedStep',num2str(0.1)); %force to get {1x201} array
+delta2 = -1.5;
+delta1 = 3.1;
+alfa1 = 1.4;
+N1o = timeseries(4);
+
+
+options.SrcWorkspace = 'current';
+stop_time = 20;
+
+s = sim('modelo', options);
 
 e = max(abs(s.N1 - yr)); % l∞
 

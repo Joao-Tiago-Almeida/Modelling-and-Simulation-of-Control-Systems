@@ -13,13 +13,13 @@
 
 %% 1. Simulação do movimento livre de uma viatura - SIMULINK
 
-% workspace do SIMULINK
+% workspace do SIMULINKs
 movimento
 %% Questão 1.5 - Simulação das equações diferenciais
-% A constante de tempo $(\tau)$, é defenida como sendo o tempo que o
+% A constante de tempo $(\tau)$, é definida como sendo o tempo que o
 % sistema demora a alcançar 63,2% de resposta estabilizada correspondente
 % ao estímulo da função degrau u(t). Na situação do movimento livre da
-% viatura $\tau = \frac{m}{\beta} [s]$.
+% viatura $\tau = \frac{m}{\beta}$ [s].
 
 % clear workspace and close all figures
 clear; close all
@@ -34,11 +34,11 @@ stop_time = 20;
 
 % settings da figura 1 - velocidade
 figure(1);clf; grid on; hold on;
-title('Variação da velocidade (v) com o tempo (t)');xlabel('t [s]');ylabel('v(t) [m/s]');
+title('Variação da velocidade (v) com o tempo (t)');xlabel('Tempo [s]');ylabel('v(t) [m/s]');
 
 % settings da figura 2 - posição
 figure(2);clf; grid on; hold on;
-title('Variação da posição (y) com o tempo (t)');xlabel('t [s]');ylabel('y(t) [m]');
+title('Variação da posição (y) com o tempo (t)');xlabel('Tempo [s]');ylabel('y(t) [m]');
 
 % criação dos arrays para alojar legendas e plots
 plotHandlesV = zeros(1,6);
@@ -53,8 +53,7 @@ for i = 1:3 % loop para cada par massa/beta
     
     for j = 1:2 % loop para cada v0 (-3 ou 3 ms^(-1))
         Vo = timeseries(Vo_(j));
-        sim_out = sim('movimento','StartTime','0','StopTime',num2str(stop_time), ...
-            'FixedStep',num2str(stop_time/100)); % execução da simulaão via simulink
+        sim_out = sim('movimento');  % execução da simulação via simulink
         % i+(j-1)*3 -- increase 1:6 troughout i and j
         % \/ desenho no primeiro plot - velocidade \/
         figure(1) % faz plot e guarda-o conjuntamente com as variáveis
@@ -91,7 +90,7 @@ figure(1);
 elpsv1 = annotation('ellipse',[0.1 .9 .05 .05]);
 tav1 = annotation('textarrow', [0.25 0.15], [0.85 0.91]);
 tav1.String = 'Vo';
-elpsv2 = annotation('ellipse',[0.1 .09 .05 .05]);
+elpsv2 = annotation('ellipse',[0.0975 .09 .05 .05]);
 tav2 = annotation('textarrow', [0.25 0.15], [0.17 0.13]);
 tav2.String = '-Vo';
 
@@ -105,16 +104,17 @@ tay.String = 'yo';
 % Sobrepôs-se aos gráficos simulados, os gráficos gerados apartir das
 % equações do movimento do carro, obtidas analiticamente:
 % 
-% $y(t) = -\tau \cdot V_o\cdot \exp \Big( \frac{-t}{-\tau} \Big) \; [m]$ 
-% $v(t) = V_o \cdot \exp \Big( \frac{-t}{-\tau} \Big) \; [\frac{m}{s^{-1}}]$
+% $y(t) = -\tau \cdot V_o\cdot \exp \Big( \frac{-t}{\tau} \Big) \; [m]$
+%
+% $v(t) = V_o \cdot \exp \Big( \frac{-t}{\tau} \Big) \; [ms^{-1}]$
 % 
 % Analisando do ponto de vista físico, um corpo em condições livres demora
 % tanto mais tempo a parar quando maior for a sua massa, visto que para a
 % mesma velocidade tem mais energia cinética $E = \frac{1}{2} m v^2$. 
-% Inversamente, quanto maior for a constante de atrito do solo menos demorada
+% Inversamente, quanto maior for a constante de atrito dinâmico do solo menos demorada
 % é a imobilização do corpo. Fica assim claro que tal como previsto
 % anteriormente, a constante de tempo está porporcionalmente relacionada com o
-% tempo de imbolização do veículo.
+% tempo de imobilização do veículo.
 
 % close SIMULINK
 close_system
