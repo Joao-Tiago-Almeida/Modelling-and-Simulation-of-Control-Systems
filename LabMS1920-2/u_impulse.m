@@ -1,6 +1,9 @@
 function y = u_impulse(t, beta)
     t_size = length(t);
     y = zeros(1, t_size);
+    
+    beta = beta_bounds(beta);
+    
     for i = 1:t_size
         if t(i) <= -(beta+1)/2 % zona 1
         	continue;

@@ -1,4 +1,9 @@
 function [v_t, v_u] = u_generator(T, alpha, beta, U1, U2, n1, n2)
+    
+    beta = beta_bounds(beta);
+    alfa = alfa_bounds(alpha);
+    
+
     % cálculo do comprimento de u1 e u2
     T1 = T/(1+alpha);
     T2 = T - T1;
@@ -20,6 +25,6 @@ function [v_t, v_u] = u_generator(T, alpha, beta, U1, U2, n1, n2)
     v_t2 = v_t2*((T2)/(1+beta)) + T1 + T2/2;
     
     % array de tempos e amplitude final
-    v_t = [v_t1 v_t2(2:end)];
-    v_u = [v_u1 v_u2(2:end)];
+    v_t = [v_t1 v_t2];
+    v_u = [v_u1 v_u2];
 end
