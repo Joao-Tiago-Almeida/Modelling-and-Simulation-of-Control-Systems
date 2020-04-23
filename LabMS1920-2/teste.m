@@ -35,12 +35,3 @@ plot(signal.y.tout,signal.y.sim)
 
 
 %sys = sistema(0,s);
-
-%ausência de atrito
-
-
-%sys = sistema(0, signal.t, signal.u);
-
-
-%atrito máximo
-%sistema(1,t_ger,u_ger);
