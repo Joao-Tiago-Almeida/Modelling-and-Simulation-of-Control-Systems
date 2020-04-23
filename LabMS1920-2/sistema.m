@@ -1,12 +1,11 @@
-function sys = sistema(b,t_ger,u_ger)
+function sys = sistema(b,s)
 
+[t_ger,u_ger] = u_generator(s,'o'); %sistena equilibrado em termos de pontos
 
 if nargin == 0
     teste
     return
 end
-
-
 
 % sistema
 
@@ -26,7 +25,7 @@ sys = ss(A,B,C,D);
 
 Gz = tf(sys);
 
-figure(4);hold on;grid on;
+figure(100);hold on;grid on;
 
 t_cont = linspace(min(t_ger),max(t_ger),length(t_ger));
 

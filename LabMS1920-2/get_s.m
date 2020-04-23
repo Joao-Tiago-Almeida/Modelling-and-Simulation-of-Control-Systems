@@ -1,8 +1,15 @@
-function [T, alpha, beta, U1, U2, n1, n2] = get_s(s)
+function [T, alpha, beta, U1, U2, n1, n2, Gz] = get_s(s)
 
     % get S struct parameters
     
-    T=s.T; alpha=s.alfa; beta = s.beta; U1=s.U(1); U2=s.U(2); n1=s.N(1); n2=s.N(2);
+    T=s.T; 
+    alpha=s.alfa; 
+    beta = s.beta; 
+    U1=s.U(1); 
+    U2=s.U(2); 
+    n1=s.N(1); 
+    n2=s.N(2);
+    Gz=s.Gz;
     
 end
 
