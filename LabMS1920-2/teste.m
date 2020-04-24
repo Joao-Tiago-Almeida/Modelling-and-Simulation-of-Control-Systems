@@ -17,22 +17,13 @@ axis([-1.1 1.1 0 1.1]);
 figure(2);clf; 
 plot(t_ger,u_ger);
 
-
+close all
 
 
 signal.u = timeseries(u_ger',t_ger');
 
-plot(signal.u)
-
 signal.y = sim('disco_rigido','Stoptime', 's.T');
 
-plot(signal.y.sim)
-figure(3);clf;
-%plot(signal.y.tout,signal.y.sim)
+signal.ref = steady_signal([2 3 4],[2 -3 4], s.X0(1));
 
-
-
-
-sys = sistema(0,s);
-
-close all
+%signal.y = sim('disco_rigido','Stoptime', 's.T');
