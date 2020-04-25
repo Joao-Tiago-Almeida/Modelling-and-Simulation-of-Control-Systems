@@ -8,28 +8,23 @@ function y = ramps_signal(t,m,xo)
         m=m(1:aux);
     end
     
-    % t must be positive
-    t = abs(t);
+    t = abs(t); % t must be positive
+    samp_t = 0.1;   % max period resolution 
+    y(1:round(sum(t)/samp_t+1)) = xo;   % declare signal
+    aux = t;    j=1;    % auxiliar variables
     
-    % max period resolution 
-    samp_t = 0.1;
-    
-    % create signal
-    y(1:round(sum(t)/samp_t+1)) = xo;
-  
-    aux = t;
-    j=1;
-    
-    for i = 1:sum(t)/samp_t
-
+    for i = 1:sum(t)/samp_t    % ouput sinal increment
+        
+        % period limit
         if aux(j) <= 0
             j=j+1;
         end
-        y(i+1)=y(i)+(m(j)*samp_t);      % slop
         aux(j) = aux(j) - samp_t;
-
+        
+        y(i+1)=y(i)+(m(j)*samp_t);      % slope
     end
-    y = timeseries(y',linspace(0,sum(t)+1,sum(t)/samp_t+1));
+    
+    y = timeseries(y',linspace(0,sum(t)+1,sum(t)/samp_t+1));    % return a sinal with multiple slopes
     
 end
 
