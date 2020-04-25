@@ -3,12 +3,10 @@ function s = set_signal()
     
     s = struct('name', 'Entrada');
     
-    s.K = 100;	% gain pre-saturation
+    s.alfa = alfa_bounds(0.5);	% relation between T1 and T2: T1 = $\alpha T2$
+    s.beta = beta_bounds(0.5);	% curve efect of the u(t) up and donw range
+    s.U = [2 4];	% max range of $u_1$(t) and $u_2$(t)
+    s.N = [6e3 1e3];	% number of ponits of $u_1$(t) and $u_2$(t)
+    s.T = max([sqrt(2*(1+s.beta)*(1+s.alfa)), sqrt(2*(1+s.beta)*(1+s.alfa)/s.alfa)]);	% $T_{minimo}$ calculated from question 6
     s.u = 0;	% input
-    s.y = 0;	% output
-    s.sample_time = 1e-3;	% sample time
-    s.q = 10;	% input decision based on question number  
-    s.yl = 10;	% question 10 saturation levels
-    s.ref = timeseries(0);	% input reference for position y1
-    
 end

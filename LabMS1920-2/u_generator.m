@@ -1,6 +1,6 @@
 function [v_t, v_u] = u_generator(s,str)
     % parsing da string de entrada
-    [T, alpha, beta, U1, U2, n1, n2] = get_s(s);
+    [T, alpha, beta, U1, U2, n1, n2] = get_signal(s);
     
     % verificao dos limites de alpha e beta 
     beta = beta_bounds(beta);
