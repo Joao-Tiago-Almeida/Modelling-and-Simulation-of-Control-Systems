@@ -1,7 +1,9 @@
 function y = u_impulse(t, beta)
+    % tamanho do vector t, criacao do vector de imagens
     t_size = length(t);
     y = zeros(1, t_size);
     
+    % verificao se beta se encontra dentro dos limites 
     beta = beta_bounds(beta);
     
     for i = 1:t_size
