@@ -1,10 +1,10 @@
-function [v_t, v_u] = u_generator(s,str)
+function [v_t, v_u] = u_generator(s)
     % parsing da string de entrada
     [T, alpha, beta, U1, U2, n1, n2] = get_signal(s);
     
     % verificao dos limites de alpha e beta 
     beta = beta_bounds(beta);
-    alfa = alfa_bounds(alpha);
+    alpha = alpha_bounds(alpha);
     
     % calculo do comprimento de u1 e u2
     T1 = T/(1+alpha);
