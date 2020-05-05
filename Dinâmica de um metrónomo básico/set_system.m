@@ -1,7 +1,7 @@
 function s = set_system()
     % Declares system struct
     
-    % known variables - TODO comment variables names
+    % known variables
     L = 0.5;  % m - arm length
     M = 0.15; % Kg - arm mass
     l = 0.4;  % m - distance to mass
@@ -18,8 +18,9 @@ function s = set_system()
     B = [0;inv(s.J)];
     C = eye(2);   % Although thr only ouput is x1, x2 allow us to give feedback to the system
     D = 0;
+    
     s.sys=ss(A,B,C,D);
     
-    s.x0 = [0 pi/4];
+    s.x0 = [0 pi/4];    % initial state
     
 end
