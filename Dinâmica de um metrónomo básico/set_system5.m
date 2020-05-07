@@ -1,5 +1,5 @@
-function s = set_system()
-    % Declares system struct
+function s = set_system5()
+    % Declares system struct with question 6 values
     
     % known variables
     L = 0.5;  % m - arm length
@@ -8,7 +8,7 @@ function s = set_system()
     m = 0.2;  % Kg - pontual mass
     k = 3;    % Nm/rad
     g = 9.8;    % m/s^2 - gravitational acceleration
-    s.beta = 0.1;   % Nm/rad
+    s.beta = 0.1;   % Nms/rad
     s.J = (3*m + M)*power(l,2)/3; % Moment of inertia
     
     s.A21 = (-k + g*(m*l + M*L/2))/s.J;
