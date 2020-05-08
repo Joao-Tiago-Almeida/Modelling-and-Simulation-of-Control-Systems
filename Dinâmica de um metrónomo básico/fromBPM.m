@@ -1,6 +1,6 @@
-% function fromBPM(bpm)
-    bpm = 150;
-    % find values for m and l, based on kwonw BPM
+function [l,m] = fromBPM(bpm)
+    % return values for m and l, based on kwonw BPMs
+    % this function works for every format of bpm array
     
     % known variables
     L = 0.25;  % m - arm length
@@ -10,11 +10,14 @@
     beta = 0.001;   % Nms/rad
     
     l = 0.05:1e-3:0.25; l=l';
-    m = 1:0.5:200; m=m'*1e-3;   % supposing that pontual mass is less than 0.2 Kg
+    m = 1:1:500; m=m'*1e-3;   % supposing that pontual mass is less than 0.5 Kg
     
+    bpm = sort(reshape(bpm,1,1,[]));   % change every kind of vector, to 3D sorted array
     wd = bpm*pi/60; % known from the question 9
-    
+     
     [l,m] = meshgrid(l,m);
+    l = repmat(l,1,1,size(wd,3));  % increase 3rd dimension size to the number of bpm 
+    
     num = k - g * (l.*m + M*L/2);
     J = m.*l.^2 + 3\M*L^2;  % moment of inertia
     
@@ -24,50 +27,30 @@
     zeta = beta./(2*J.*wn_c); % damping ratio
     wd_c = real(wn_c.*sqrt(1-zeta.^2)); % relation between frequencies
     
-    w_dif = abs(wd_c - wd);
+%     surfc(l,m,wd_c*60/pi)   % 3D plot for BPM in order of mass and length
+%     shading interp;
+%     view(75,30);
     
-    [~,col] = min(min(w_dif,[],1)); % get minimum from the minimum of each column
-    [~,row] = min(min(w_dif,[],2)); % get minimum from the minimum of each row
+    w_dif = abs(wd_c - wd); % double matrix of differences with l1,2 * m
+    
+    min_m = min(w_dif,[],2);   % get the minimum difference per mass index for each matrix
+    min_m = sum(min_m,3); % sum the differences of each matrix. vector with both differences per mass index (row)
+    [~,row] = min(min_m);  % get minimum mass index for both lengths
+       
+    [~,col] = min(w_dif(row,:,:)); % get the minimum length index for each matrix for specific mass index
+    col = squeeze(col); % rearange colunms
+    
+    l = l(row,col); % m - distance to mass, differs for each BPM
+    m = m(row,col(1)); % Kg - pontual mass. constant among BPM
 
-    disp(['[GOAL] damping frequency: ' num2str(wd)]);
+    disp(['[GOAL] BPM: ' num2str(squeeze(bpm)')]);
+    disp(['[GOAL] damping frequency: ' num2str(squeeze(wd)')]);
     disp(['[CALCULATED] damping frequency: ' num2str(wd_c(row,col))]);
-    disp(['difference: ' num2str(w_dif(row,col))]);
-    disp(['[CALCULATED] length - l: ' num2str(l(1,col))]);
-    disp(['[CALCULATED] mass - m: ' num2str(m(row))]);
+    w_dif = squeeze(w_dif(row,col,:)); disp(['[CALCULATED] differences: ' num2str(diag(w_dif)')]);
+    disp(['[CALCULATED] length - l: ' num2str(l)]);
+    disp(['[CALCULATED] mass - m: ' num2str(m)]);
     
-% end
+    debug = 1;
+ %end
 
-    surfc(l,m,wd_c*60/pi)
-    shading interp;
-    view(45,30);
-
-    m = m(row);
-    l = l(1,col);
-    
-    s.J = m.*l.^2 + 3\M*L^2;  % moment of inertia
    
-
-
-s.A21 = (-k + g*(m*l + M*L/2))/s.J;
-s.A22 = -beta/s.J;
-
-A = [0 1;s.A21 s.A22];
-B = [0;inv(s.J)];
-C = eye(2);   % Although thr only ouput is x1, x2 allow us to give feedback to the system
-D = 0;
-
-s.sys=ss(A,B,C,D);
-
-s.x0 = [pi/4;0];    % initial state
-
-sig = set_signal();
-
-c = set_controller(6);
-sig.y=sim('metron','StopTime','20');
-
-v = sig.y.simout.Data(:,1);
-t = sig.y.simout.Time;
-
-% plotYY(sig.y,'Response to Initial Condition -  multiple blocks');
-
-findpeaks(v,t);

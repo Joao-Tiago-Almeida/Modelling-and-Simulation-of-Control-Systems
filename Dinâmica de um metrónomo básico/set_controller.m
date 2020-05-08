@@ -10,5 +10,6 @@ function c = set_controller(question)
     
     c.samptime = 1e-2;  % sampling time
     c.schematic = question; % switch input based on system schematic
+    c.torquelimit = pi/90; % limit for external torque action
     
 end
