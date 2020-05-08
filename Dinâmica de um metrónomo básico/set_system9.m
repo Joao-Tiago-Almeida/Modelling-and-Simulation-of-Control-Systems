@@ -25,6 +25,3 @@ function s = set_system9(l,m)
     s.x0 = [pi/4;0];    % initial state
     
 end
-
-
-%inv(s.J)*(-s.beta*u(3)-s.k*u(2)*(1+(u(2)^2)/100)+(s.m*s.l+s.L*s.M/2)*s.g*sin(u(2))+u(4))

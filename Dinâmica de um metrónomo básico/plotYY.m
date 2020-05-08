@@ -1,4 +1,4 @@
-    function f = plotYY(y,t)
+function f = plotYY(y,t)
     % plot Time Response: y1(t) and y2(t)
 
     f = figure(); clf; hold on; grid on;
