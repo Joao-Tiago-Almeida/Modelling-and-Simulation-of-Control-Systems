@@ -1,4 +1,4 @@
-function fLegend(label,pos)
+function l = fLegend(label,pos)
     % prints labels formatted
     %
     % if it is called before quiver function, quiver legend will also be
@@ -10,8 +10,8 @@ function fLegend(label,pos)
     l.FontSize = 13;
     l.Location = 'best'; % default position
 
-    if (nargin == 2) && strcmp(pos,'outside')
-        l.Location = 'bestoutside'; 
+    if (nargin == 2)
+        l.Location = pos; 
     end
 
 end

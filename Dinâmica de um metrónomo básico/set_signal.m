@@ -1,6 +1,6 @@
 function s = set_signal()
     % Declares signal struct
     
-    s.binario = 0;
+    s.binario = timeseries(0);
     
 end

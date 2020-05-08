@@ -6,7 +6,7 @@ function quiverSS(A,X) % Calls this function after a SS plot is drawn
         x1 = X.simout.Data(:,1);    % angular position
         x2 = X.simout.Data(:,2);    % angular velocity
 
-        n = length(x1)/30; % number of arrows per position and velocity
+        n = length(x1)/50; % number of arrows per position and velocity
 
 
     elseif isa(X,'matlab.ui.Figure')  % is an figure 
@@ -14,8 +14,10 @@ function quiverSS(A,X) % Calls this function after a SS plot is drawn
         x1 = X.CurrentAxes.XLim;    % limits of xx axe
         x2 = X.CurrentAxes.YLim;    % limits of yy axe
 
-        n = 20; 
+        n = 10; 
     end
+    
+    %n=5; % TODO
 
      x = [linspace(min(x1),max(x1),n);linspace(min(x2),max(x2),n)];  % coordinates where arrows will be displayed
 

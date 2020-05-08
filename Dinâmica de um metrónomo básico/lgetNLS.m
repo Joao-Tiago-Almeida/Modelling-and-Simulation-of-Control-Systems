@@ -1,15 +1,14 @@
-function l_return = lgetNLS(bpm,l,s,c)
+function l_return = lgetNLS(bpm,l,s,c) % c is needed in SIMULINK
     % approx the values from a linear system to a nonlinear system
-    % return BPM of a system, and plot a figure with time response ans
-    % theoretical analysis if fig == 1
-    % searchs the best ls, using a convergence method
-    %bpm = [55.401662049861500, 160];
+    % return BPM of a system, and plot a figure with time response and
+    %   searchs the best ls, using a convergence method
+    
     % bpm's goal
     bpm = sort(reshape(bpm,[],1));   % change every kind of vector to 1D vector
-    c.schematic = 10;
-    options.SrcWorkspace = 'current';
+
+    options.SrcWorkspace = 'current'; % set function's worspace for simulink
     
-    nr = 20; % number of ls to test
+    nr = 30; % number max of points up to test. Most likely to converge before reach that much
     new_l = zeros(nr,length(bpm));
     bpm_vect = zeros(nr,length(bpm));
     
@@ -41,7 +40,7 @@ function l_return = lgetNLS(bpm,l,s,c)
                 break
             end
             
-            if j < nr - 1 % there is still values to compute
+            if j < nr % there is still values to compute
             % convergence of new_l based on last two lengths 
                 if bpm(i) < bpm_vect(j,i) % bpm's goal is lower so the next length up to test has to be bigger 
                     if  bpm(i) < bpm_vect(j-1,i) % did not cross the goal, same way

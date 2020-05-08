@@ -3,7 +3,7 @@ function c = set_controller(question)
     
     % default: state-space model
     if nargin == 0
-        question = 6;
+        question = 2;
     end
     
     c = struct('name', 'Controlador');

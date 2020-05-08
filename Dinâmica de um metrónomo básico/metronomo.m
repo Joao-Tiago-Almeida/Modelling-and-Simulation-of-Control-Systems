@@ -6,14 +6,14 @@ s = set_system5();
 sig = set_signal();
 
 %%  Question 5 - Schematic system whit multiple blocks
-c = set_controller(5);  % set c.schematic = 5 - multiple blocks
+c = set_controller(1);  % set c.schematic = 1 - multiple blocks
 sig.y=sim('metron','StopTime', '5');
 
 plotYY(sig.y,'Response to Initial Condition -  multiple blocks');
 plotSS(sig.y,'State Space to Initial Condition -  multiple blocks');
 
 %%  Question 6 - Schematic system state-system block
-c = set_controller();   % set c.schematic = 6 - SS block
+c = set_controller();   % set c.schematic = 2 - SS block
 sig.y=sim('metron','StopTime', '5');
 
 plotYY(sig.y,'Response to Initial Condition -  State-Space block');
@@ -60,7 +60,7 @@ l4 = ['$(x_1,x_2)$ =' mat2str(s.x0,3)];   % legend
 sig.y=sim('metron','StopTime', '5');
 plotSS(sig.y);
 
-fLegend({l1 l2 l3 l4},'outside');
+fLegend({l1 l2 l3 l4},'bestoutside');
 quiverSS(s.sys.A, f);
 
 %% eigenvalues and eigenvectors for fifferents for beta=1;
@@ -84,7 +84,7 @@ l2 = ['$(x_1,x_2)$ =' mat2str(s.x0,3)];   % legend
 sig.y=sim('metron','StopTime', '5');
 plotSS(sig.y);
 
-fLegend({l1 l2},'outside');
+fLegend({l1 l2},'bestoutside');
 quiverSS(s.sys.A, f);
 
 %% Question 9 - find mass and length values for multiples BPM
@@ -93,55 +93,78 @@ bpm_w = [50 150];
 
 [l_ls,m] = fromBPM(bpm_w); % get length and mass for each bpm wanted
 
-c.schematic = 6;
+c.schematic = 2;
 
 s = set_system9(l_ls(1),m);
 sig.y=sim('metron','StopTime','15');    % quarter of a minute
-bpm_c = getBPM(sig.y,s,'Linear System -  BPM = ');
+getBPM(sig.y,s,'Linear System -  BPM = ');
 
 s = set_system9(l_ls(2),m);
 sig.y=sim('metron','StopTime','15');    % quarter of a minute
-bpm_c = getBPM(sig.y,s,'Linear System -  BPM = ');
+getBPM(sig.y,s,'Linear System -  BPM = ');
 
 %% Question 10 - nonlinear system
 
-c.schematic = 10;
+c.schematic = 3;
 
 s = set_system9(l_ls(1),m);
 sig.y=sim('metron','StopTime','15');    % quarter of a minute
-bpm_c_1 = getBPM(sig.y,s,'NonLinear System -  BPM = ');
+getBPM(sig.y,s,'NonLinear System -  BPM = ');
 
 s = set_system9(l_ls(2),m);
 sig.y=sim('metron','StopTime','15');    % quarter of a minute
-bpm_c_2 = getBPM(sig.y,s,'NonLinear System -  BPM = ');
+getBPM(sig.y,s,'NonLinear System -  BPM = ');
 
 %% new values for l
 
-l_nls = lgetNLS(bpm_w,l_ls,s,c);
-% Due to a lower length, nonlinear system's frequency is higher
+c.schematic = 3;
 
-c.schematic = 10;
+l_nls = lgetNLS(bpm_w,l_ls,s,c);
+% Due to lower length, nonlinear system's frequency is higher
 
 s = set_system9(l_nls(1),m);
 sig.y=sim('metron','StopTime','15');    % quarter of a minute
-bpm_c_1 = getBPM(sig.y,s,'NonLinear System -  BPM = ');
+getBPM(sig.y,s,'NonLinear System -  BPM = ');
 
 s = set_system9(l_nls(2),m);
 sig.y=sim('metron','StopTime','15');    % quarter of a minute
-bpm_c_2 = getBPM(sig.y,s,'NonLinear System -  BPM = ');
+getBPM(sig.y,s,'NonLinear System -  BPM = ');
 
 
 %% Question 11 - External torque in a nonlinear system
 
-c.schematic = 11;
+c.schematic = 4;
+% Due to external torque aplication, velocity in theta arround 0 increases,
+% so BPM will also increases
 
 s = set_system9(l_nls(1),m);
 sig.y=sim('metron','StopTime','30');    % quarter of a minute
-plotYY(sig.y,'Torque (impulses) $|\theta|$ \textless 1 rad');
+getBPM(sig.y,s,'Torque (impulses) $|\theta|$ \textless 1 rad - BPM = ');
 
 s = set_system9(l_nls(2),m);
 sig.y=sim('metron','StopTime','30');    % quarter of a minute
-plotYY(sig.y,'Torque (impulses) $|\theta|$ \textless 1 rad');
+getBPM(sig.y,s,'Torque (impulses) $|\theta|$ \textless 1 rad - BPM = ');
+
+%% new values for l (show how the system change afect BPM) (NOT ASKED)
+
+c.schematic = 4;
+
+l_nls = lgetNLS(bpm_w,l_ls,s,c);
+% Due to lower length, nonlinear system's frequency is higher
+
+s = set_system9(l_nls(1),m);
+sig.y=sim('metron','StopTime','15');    % quarter of a minute
+getBPM(sig.y,s,'NonLinear System -  BPM = ');
+
+s = set_system9(l_nls(2),m);
+sig.y=sim('metron','StopTime','15');    % quarter of a minute
+getBPM(sig.y,s,'NonLinear System -  BPM = ');
+
+%% Question 12 - bode diagram
+
+multiBodes(l_ls,m,'Bode Diagram - Linear System');
+
+%% Question 13 - 
 
 %% EZ 4 DEBUG, CUZ IT'S THE LAST LINE
 debug = 0;

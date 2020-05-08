@@ -14,7 +14,7 @@ function bpm_c = getBPM(y,s,tit)
     
     if nargin > 2 % includes graph of simulation and theoretical
         
-        disp(['[CALCULATED] BPM: ' num2str(bpm_c)]);
+        disp(['[COMPUTED] BPM: ' num2str(bpm_c)]);
         
         f = plotYY(y,[tit num2str(bpm_c)]);
     

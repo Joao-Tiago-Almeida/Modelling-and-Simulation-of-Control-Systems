@@ -6,5 +6,5 @@ function f = plotYY(y,t)
     title(t,'FontName','Arial','FontSize',14,'interpreter','latex');
     xlabel('Time [s]','FontName','Arial','FontSize',13,'interpreter','latex');
     ylabel('State vector','FontName','Arial','FontSize',13,'interpreter','latex');
-    fLegend({'$x_1 = \theta$ [rad]','$x_2 = \dot{\theta}$ [rad/s]'})
+    fLegend({'$x_1 = \theta$ [rad]','$x_2 = \dot{\theta}$ [rad/s]'});
 end

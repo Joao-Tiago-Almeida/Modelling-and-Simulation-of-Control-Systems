@@ -45,10 +45,10 @@ function [l,m] = fromBPM(bpm)
 
     disp(['[GOAL] BPM: ' num2str(squeeze(bpm)')]);
     disp(['[GOAL] damping frequency: ' num2str(squeeze(wd)')]);
-    disp(['[CALCULATED] damping frequency: ' num2str(wd_c(row,col))]);
-    w_dif = squeeze(w_dif(row,col,:)); disp(['[CALCULATED] differences: ' num2str(diag(w_dif)')]);
-    disp(['[CALCULATED] length - l: ' num2str(l)]);
-    disp(['[CALCULATED] mass - m: ' num2str(m)]);
+    disp(['[COMPUTED] damping frequency: ' num2str(wd_c(row,col))]);
+    w_dif = squeeze(w_dif(row,col,:)); disp(['[COMPUTED] differences: ' num2str(diag(w_dif)')]);
+    disp(['[COMPUTED] length - l: ' num2str(l)]);
+    disp(['[COMPUTED] mass - m: ' num2str(m)]);
     
     debug = 1;
  %end
