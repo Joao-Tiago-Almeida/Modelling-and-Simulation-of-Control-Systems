@@ -12,5 +12,7 @@ function c = set_controller(question)
     c.schematic = question; % switch input based on system schematic
     c.torquelimit = pi/90; % limit for external torque action
     c.torque = 0;   % represents logical signal of torque
+    c.freq = 0; % frequency when torque is a sin wave
+    c.stoptime = 15;    % simulation time
     
 end

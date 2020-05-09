@@ -34,7 +34,7 @@ function quiverSS(A,X) % Calls this function after a SS plot is drawn
     q.Color = 255\[hex2dec(color_hex(1:2)) hex2dec(color_hex(3:4)) hex2dec(color_hex(5:6))];
     %q.LineWidth = 1;
     q.AutoScaleFactor = 0.7;
-    q.DisplayName = 'scale: 1 rad/s';
+    q.DisplayName = 'quiver';
     q.DataTipTemplate.Interpreter = 'latex';
     q.DataTipTemplate.FontName = 'Arial';
     q.DataTipTemplate.FontSize = 13;

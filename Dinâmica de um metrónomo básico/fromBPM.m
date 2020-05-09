@@ -1,6 +1,7 @@
-function [l,m] = fromBPM(bpm)
+function [l,m] = fromBPM(bpm,t)
     % return values for m and l, based on kwonw BPMs
     % this function works for every format of bpm array
+    % if nargin > 1 plot an 3D figure
     
     % known variables
     L = 0.25;  % m - arm length
@@ -27,9 +28,27 @@ function [l,m] = fromBPM(bpm)
     zeta = beta./(2*J.*wn_c); % damping ratio
     wd_c = real(wn_c.*sqrt(1-zeta.^2)); % relation between frequencies
     
-%     surfc(l,m,wd_c*60/pi)   % 3D plot for BPM in order of mass and length
-%     shading interp;
-%     view(75,30);
+    if nargin > 1   % 3D plot for BPM in order of mass and length
+        figure(); clf;
+        surfc(l(:,:,1),m,wd_c(:,:,1)*60/pi)   
+        shading interp;
+        colormap(jet);
+        colorbar;
+        view(75,15);
+        title(t,'FontName','Arial','FontSize',14,'interpreter','latex');
+        ylabel('mass [Kg]','FontName','Arial','FontSize',13,'interpreter','latex');
+        xlabel('length [m]','FontName','Arial','FontSize',13,'interpreter','latex');
+        zlabel('BPM','FontName','Arial','FontSize',13,'interpreter','latex');
+        
+        figure(); clf;
+        contourf(l(:,:,1),m,wd_c(:,:,1)*60/pi)   
+        colormap(jet);
+        colorbar;
+        title('BPM','FontName','Arial','FontSize',14,'interpreter','latex');
+        ylabel('mass [Kg]','FontName','Arial','FontSize',13,'interpreter','latex');
+        xlabel('length [m]','FontName','Arial','FontSize',13,'interpreter','latex');
+        
+    end
     
     w_dif = abs(wd_c - wd); % double matrix of differences with l1,2 * m
     
@@ -50,7 +69,6 @@ function [l,m] = fromBPM(bpm)
     disp(['[COMPUTED] length - l: ' num2str(l)]);
     disp(['[COMPUTED] mass - m: ' num2str(m)]);
     
-    debug = 1;
- %end
+ end
 
    

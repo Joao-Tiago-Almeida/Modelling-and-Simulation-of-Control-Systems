@@ -4,7 +4,7 @@ function l_return = lgetNLS(bpm,l,s,c) % c is needed in SIMULINK
     %   searchs the best ls, using a convergence method
     
     % bpm's goal
-    bpm = sort(reshape(bpm,[],1));   % change every kind of vector to 1D vector
+    bpm = reshape(bpm,[],1);   % change every kind of vector to 1D vector
 
     options.SrcWorkspace = 'current'; % set function's worspace for simulink
     
@@ -22,7 +22,7 @@ function l_return = lgetNLS(bpm,l,s,c) % c is needed in SIMULINK
             new_l(:,i) = linspace(l(i),0.25,nr);
         elseif bpm_vect(1,i) < bpm(i) % ponctual mass is to far from the spring
             new_l(:,i) = linspace(0.05,l(i),nr);
-            new_l(:,i) = [new_l(end,1) new_l(2:end-1,i)]; % first position already tested with previous lengths
+            new_l(:,i) = flip(new_l(:,i)); % decreasing length 
         else % bpm for nonlinear system and linear system is equal 
             new_l(nr,i) = l(i); % previously computed
             bpm_vect(nr,i) = bpm(i); % previously computed
