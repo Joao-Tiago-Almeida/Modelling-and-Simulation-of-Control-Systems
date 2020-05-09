@@ -44,7 +44,7 @@ function [l,m] = fromBPM(bpm)
     m = m(row,col(1)); % Kg - pontual mass. constant among BPM
 
     disp(['[GOAL] BPM: ' num2str(squeeze(bpm)')]);
-    disp(['[GOAL] damping frequency: ' num2str(squeeze(wd)')]);
+    disp(['[GOAL] natural frequency: ' num2str(squeeze(wd)')]);
     disp(['[COMPUTED] damping frequency: ' num2str(wd_c(row,col))]);
     w_dif = squeeze(w_dif(row,col,:)); disp(['[COMPUTED] differences: ' num2str(diag(w_dif)')]);
     disp(['[COMPUTED] length - l: ' num2str(l)]);

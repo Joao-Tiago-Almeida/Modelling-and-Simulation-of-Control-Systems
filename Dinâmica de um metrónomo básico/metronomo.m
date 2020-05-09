@@ -89,11 +89,12 @@ quiverSS(s.sys.A, f);
 
 %% Question 9 - find mass and length values for multiples BPM
 
-bpm_w = [50 150];
+bpm_w = [55 107]; % Adagio[55-65] Andante[75-107]
 
 [l_ls,m] = fromBPM(bpm_w); % get length and mass for each bpm wanted
 
 c.schematic = 2;
+c.torque = 0;
 
 s = set_system9(l_ls(1),m);
 sig.y=sim('metron','StopTime','15');    % quarter of a minute
@@ -133,7 +134,8 @@ getBPM(sig.y,s,'NonLinear System -  BPM = ');
 
 %% Question 11 - External torque in a nonlinear system
 
-c.schematic = 4;
+c.schematic = 3;
+c.torque = 1;
 % Due to external torque aplication, velocity in theta arround 0 increases,
 % so BPM will also increases
 
@@ -147,7 +149,8 @@ getBPM(sig.y,s,'Torque (impulses) $|\theta|$ \textless 1 rad - BPM = ');
 
 %% new values for l (show how the system change afect BPM) (NOT ASKED)
 
-c.schematic = 4;
+c.schematic = 3;
+c.torque = 1;
 
 l_nls = lgetNLS(bpm_w,l_ls,s,c);
 % Due to lower length, nonlinear system's frequency is higher
@@ -165,7 +168,7 @@ getBPM(sig.y,s,'NonLinear System -  BPM = ');
 multiBodes(l_ls,m,'Bode Diagram - Linear System');
 
 %% Question 13 - 
-
+convertWNinM(bpm_w*pi/60,l_ls)
 %% EZ 4 DEBUG, CUZ IT'S THE LAST LINE
 debug = 0;
 
