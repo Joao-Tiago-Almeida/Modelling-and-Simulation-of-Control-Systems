@@ -1,5 +1,5 @@
 function s = set_system5()
-    % Declares system struct with question 6 values
+    % Declares system struct with question 5 values
     
     % known variables
     s.L = 0.5;  % m - arm length

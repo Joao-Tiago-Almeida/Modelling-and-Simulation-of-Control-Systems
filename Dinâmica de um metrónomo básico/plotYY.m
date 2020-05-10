@@ -1,5 +1,5 @@
 function f = plotYY(y,t)
-    % plot Time Response: y1(t) and y2(t)
+    % plots Time Response: y1(t) and y2(t)
 
     f = figure(); clf; hold on; grid on;
     plot(y.simout);

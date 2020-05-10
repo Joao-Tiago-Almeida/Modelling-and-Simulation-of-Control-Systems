@@ -1,4 +1,4 @@
-function mass = getmfromSimulation(s,c)
+function mass = get_m_fromSimulation(s,c)
     % this function computes mass over fixed length from the center until
     % the punctual mass
 

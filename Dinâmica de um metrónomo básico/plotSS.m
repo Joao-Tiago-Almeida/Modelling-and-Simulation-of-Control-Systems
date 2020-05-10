@@ -1,5 +1,5 @@
 function f = plotSS(y,t)
-    % plot Steady-Space: y2(y1)
+    % plots Steady-Space: y2(y1)
     % creats new figure if nargin>1
 
     f = 'none'; % default: no figure 
