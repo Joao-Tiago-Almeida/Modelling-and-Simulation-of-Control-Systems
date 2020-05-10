@@ -1,4 +1,4 @@
-function mass = getWnfromSimulation(s,c)
+function mass = getmfromSimulation(s,c)
     % this function computes mass over fixed length from the center until
     % the punctual mass
 
@@ -19,6 +19,7 @@ function mass = getWnfromSimulation(s,c)
         An(j) = a(end); % last peak should occur during a establish movement
     end
     
+    s = rmfield(s, 'm'); % to be sure it isn't used to compute
     
     s_freq = 1i*freq';   % s = jw
     s_f = @(x) s_freq(x); % handle function to get whether simulation one or two

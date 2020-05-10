@@ -169,11 +169,11 @@ multiBodes(l_ls,m,'Bode Diagram - Linear System');
 
 %% Question 13 - 
 l_nls = lgetNLS(bpm_w,l_ls,s,c);
-mass = getWnfromSimulation(s,c);
+mass = getmfromSimulation(s,c);
 disp(['[COMPUTED] mass: ' num2str(mass, '%.4f') ' Kg']);
 
 s = set_system9(l_nls(2),m);
-mass = getWnfromSimulation(s,c);
+mass = getmfromSimulation(s,c);
 disp(['[COMPUTED] mass: ' num2str(mass, '%.4f') ' Kg']);
 %% EZ 4 DEBUG, CUZ IT'S THE LAST LINE
 debug = 0;
