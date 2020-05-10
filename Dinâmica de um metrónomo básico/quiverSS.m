@@ -1,5 +1,5 @@
 function quiverSS(A,X) % Calls this function after a SS plot is drawn
-    % draws a velocity plot.
+    % draws a velocity plot
 
     if isa(X,'Simulink.SimulationOutput')   % comes from SIMULINK simulation
 

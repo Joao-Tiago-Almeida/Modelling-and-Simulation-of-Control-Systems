@@ -28,6 +28,7 @@ function [l,m] = fromBPM(bpm,t)
     zeta = beta./(2*J.*wn_c); % damping ratio
     wd_c = real(wn_c.*sqrt(1-zeta.^2)); % relation between frequencies
     
+    
     if nargin > 1   % 3D plot for BPM in order of mass and length
         figure(); clf;
         surfc(l(:,:,1),m,wd_c(:,:,1)*60/pi)   
