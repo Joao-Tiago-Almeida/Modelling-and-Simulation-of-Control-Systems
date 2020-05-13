@@ -10,8 +10,10 @@ function [l,m] = fromBPM(bpm,t)
     g = 9.8;    % m/s^2 - gravitational acceleration
     beta = 0.001;   % Nms/rad
     
-    l = 0.05:1e-3:0.25; l=l';
-    m = 1e-3:1e-3:0.093; m=m';   % supposing that pontual mass is less than Mass which causes instability 
+    mMax = (k/g -M*L/2)/L; % mass maximum to a stable system, for all lengths
+    
+    l = 0.05:1e-3:0.25; l=l';   % limits for l
+    m = 1e-3:1e-3:mMax; m=m';   % limits for L
     
     bpm = sort(reshape(bpm,1,1,[]));   % change every kind of vector, to 3D sorted array
     wd = bpm*pi/60; % known from the question 9

@@ -500,7 +500,7 @@ disp(['[COMPUTED] mass: ' mat2str(round(mass,4)) ' Kg']);
 
 s = set_system9(l_ls(2),m);
 mass = get_m_fromSimulation(s,c);
-disp(['[COMPUTED] mass: ' mat2str(round(mass,4)) ' Kg']);
+disp(['[COMPUTED] mass: ' num2str(mass, '%.4f') ' Kg']);
 %% Anexos
 publishOptions.evalCode = false;    % does not evaluate the code
 fLegend.html = publish('fLegend.m',publishOptions);
