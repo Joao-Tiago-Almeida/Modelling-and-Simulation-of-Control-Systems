@@ -8,7 +8,7 @@ function l_return = lgetNLS(bpm,l,s,c) % c is needed in SIMULINK
 
     options.SrcWorkspace = 'current'; % set function's worspace for simulink
     
-    nr = 30; % number max of points up to test. Most likely to converge before reach that much
+    nr = 10; % number max of points up to test. Most likely to converge before reach that much
     new_l = zeros(nr,length(bpm));
     bpm_vect = zeros(nr,length(bpm));
     

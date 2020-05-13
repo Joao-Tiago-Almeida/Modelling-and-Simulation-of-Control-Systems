@@ -12,7 +12,7 @@ function mass = get_m_fromSimulation(s,c)
     An = zeros(2,1);    % range during saturation state
     freq = [1 10];    % rad/s
     
-    for j = 1:2 
+    for j = 1:2
         c.freq = freq(j);   % frequencies to simulate
         y = sim('metron',options);    % simulation
         a = findpeaks(y.simout.Data(:,1),y.simout.Time);    % range during all simulation
@@ -20,6 +20,7 @@ function mass = get_m_fromSimulation(s,c)
     end
     
     s = rmfield(s, 'm'); % to be sure it isn't used to compute
+    mMax = 0.093; % mass which causes instability 
     
     s_freq = 1i*freq';   % s = jw
     s_f = @(x) s_freq(x); % handle function to get whether simulation one or two
@@ -33,7 +34,9 @@ function mass = get_m_fromSimulation(s,c)
     FT_1 = abs(An(1)/H(1)); % symfun
     FT_2 = abs(An(2)/H(2)); % symfun
     
-    Sm = solve(FT_1 == FT_2, m);    % Resolve 1st order system   
+    eqs = [FT_1 == FT_2, m<mMax];
+    
+    Sm = solve(FT_1 == FT_2, m<0.093, m);    % Resolve 1st order system   
     mass = double(Sm);  % computed mass
       
 end

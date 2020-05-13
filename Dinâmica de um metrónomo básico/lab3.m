@@ -309,7 +309,7 @@ quiverSS(s.sys.A, f);
 % o sistema linear em estudo realiza para diferentes combinações de distâncias 
 % e massas.
 
-bpm_w = [50 150]; % Adagio[55-65] Vivace[140-159]
+bpm_w = [52 142]; % Adagio[55-65] Vivace[140-159]
 
 t = {'Variation of the frequency of oscillation with the','distance from the mass to the center and its mass.'};
 [l_ls,m] = fromBPM(bpm_w,t); % get length and mass for each bpm wanted
@@ -500,7 +500,7 @@ disp(['[COMPUTED] mass: ' mat2str(round(mass,4)) ' Kg']);
 
 s = set_system9(l_ls(2),m);
 mass = get_m_fromSimulation(s,c);
-disp(['[COMPUTED] mass: ' num2str(mass, '%.4f') ' Kg']);
+disp(['[COMPUTED] mass: ' mat2str(round(mass,4)) ' Kg']);
 %% Anexos
 publishOptions.evalCode = false;    % does not evaluate the code
 fLegend.html = publish('fLegend.m',publishOptions);

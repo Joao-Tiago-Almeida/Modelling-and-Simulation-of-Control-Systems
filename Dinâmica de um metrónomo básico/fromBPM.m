@@ -11,7 +11,7 @@ function [l,m] = fromBPM(bpm,t)
     beta = 0.001;   % Nms/rad
     
     l = 0.05:1e-3:0.25; l=l';
-    m = 1:1:500; m=m'*1e-3;   % supposing that pontual mass is less than 0.5 Kg
+    m = 1e-3:1e-3:0.093; m=m';   % supposing that pontual mass is less than Mass which causes instability 
     
     bpm = sort(reshape(bpm,1,1,[]));   % change every kind of vector, to 3D sorted array
     wd = bpm*pi/60; % known from the question 9
