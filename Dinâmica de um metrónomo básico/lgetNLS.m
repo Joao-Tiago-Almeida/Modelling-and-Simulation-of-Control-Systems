@@ -45,13 +45,13 @@ function l_return = lgetNLS(bpm,l,s,c) % c is needed in SIMULINK
             % convergence of new_l based on last two lengths 
                 if bpm(i) < bpm_vect(j,i) % bpm's goal is lower so the next length up to test has to be bigger 
                     if  bpm(i) < bpm_vect(j-1,i) % did not cross the goal, same way
-                        new_l(j+1,i) =  new_l(j,i) + (new_l(j,i)-new_l(j-1,i)); % decrease a lil 
+                        new_l(j+1,i) =  new_l(j,i) + (new_l(j,i)-new_l(j-1,i)); % increase a little
                     else % crossed the goal, change increment sinal
                         new_l(j+1,i) = (new_l(j,i) + new_l(j-1,i))/2; % convergence
                     end
                 else % bpm's goal is bigger so the next length up to test has to be lower
                     if  bpm(i) > bpm_vect(j-1,i) % did not cross the goal, same way
-                        new_l(j+1,i) =  new_l(j,i) + (new_l(j,i)-new_l(j-1,i)); %increase a lil
+                        new_l(j+1,i) =  new_l(j,i) + (new_l(j,i)-new_l(j-1,i)); % decrease a little
                     else % crossed the goal, change increment sinal
                         new_l(j+1,i) = (new_l(j,i) + new_l(j-1,i))/2; % convergence
                     end

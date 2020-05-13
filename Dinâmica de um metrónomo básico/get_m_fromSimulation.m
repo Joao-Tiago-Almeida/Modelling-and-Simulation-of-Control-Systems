@@ -20,7 +20,7 @@ function mass = get_m_fromSimulation(s,c)
     end
     
     s = rmfield(s, 'm'); % to be sure it isn't used to compute
-    mMax = 0.093;   % mass maximum to a stable system
+    mMax = get_m_limit(s.L);   % mass maximum to a stable system
     
     s_freq = 1i*freq';   % s = jw
     s_f = @(x) s_freq(x); % handle function to get whether simulation one or two

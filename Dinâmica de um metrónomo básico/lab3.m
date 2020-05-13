@@ -474,7 +474,10 @@ multiBodes(l_ls,m,'Bode Diagram - Linear System');
 % da massa no ponteiro. A outra diferença reside no ganho para baixas frequências, 
 % que é maior para o caso em que o comprimento é igualmente maior. Uma possível 
 % explicação reside no facto de que para este caso, a amplitude de abertura é 
-% naturalmente maior dado o torque gravitacional ter um peso importante. 
+% naturalmente maior dado o torque gravitacional ter um peso importante. Um
+% dispositivo que pode ser utilizado para introduzir entradas sinusóidais
+% (tendo em vista a obtenção do diagrama de Bode por exemplo) é um motor
+% capaz de produzir torque com tais formas de onda.
 %% Pergunta 13 - Medição de uma massa a partir da sua posição e dada uma entrada sinusoidal no sistema. 
 % Para procedermos à medição da massa, faz-se uso da propriedade da resposta 
 % de um SLIT a uma onda de entrada sinusóidal. Como a saída será sinusóidal também, 
@@ -500,7 +503,11 @@ disp(['[COMPUTED] mass: ' mat2str(round(mass,4)) ' Kg']);
 
 s = set_system9(l_ls(2),m);
 mass = get_m_fromSimulation(s,c);
-disp(['[COMPUTED] mass: ' num2str(mass, '%.4f') ' Kg']);
+disp(['[COMPUTED] mass: ' mat2str(round(mass,4)) ' Kg']);
+
+%%
+% Os valores de massa obtidos estão muito próximos (ou até mesmo iguais) do valor usado para
+% simulação, isto é, o valor real da massa em questão. 
 %% Anexos
 publishOptions.evalCode = false;    % does not evaluate the code
 fLegend.html = publish('fLegend.m',publishOptions);
@@ -516,6 +523,7 @@ quiverSS.html = publish('quiverSS.m',publishOptions);
 set_controller.html = publish('set_controller.m',publishOptions);
 set_system5.html = publish('set_system5.m',publishOptions);
 set_system9.html = publish('set_system9.m',publishOptions);
+get_m_limit.html = publish('get_m_limit.m',publishOptions);
 %%
 % <fLegend.html fLegend>    Formats legend.
 %
@@ -546,6 +554,9 @@ set_system9.html = publish('set_system9.m',publishOptions);
 %
 % <set_system9.html set_system9>	Declares system struct with question 9
 % values.
+%
+% <get_m_limit.html get_m_limit>	Detects the maximum limit for m such
+% that the system is still stable.
 
 %%
 close all
