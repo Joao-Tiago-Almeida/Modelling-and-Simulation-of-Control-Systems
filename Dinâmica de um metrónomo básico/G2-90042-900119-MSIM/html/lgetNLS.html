@@ -1,0 +1,201 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>lgetNLS</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-13"><meta name="DC.source" content="lgetNLS.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> l_return = lgetNLS(bpm,l,s,c) <span class="comment">% c is needed in SIMULINK</span>
+    <span class="comment">% approx the values from a linear system to a nonlinear system</span>
+    <span class="comment">% return BPM of a system, and plot a figure with time response and</span>
+    <span class="comment">%   searchs the best ls, using a convergence method</span>
+
+    <span class="comment">% bpm's goal</span>
+    bpm = reshape(bpm,[],1);   <span class="comment">% change every kind of vector to 1D vector</span>
+
+    options.SrcWorkspace = <span class="string">'current'</span>; <span class="comment">% set function's worspace for simulink</span>
+
+    nr = 10; <span class="comment">% number max of points up to test. Most likely to converge before reach that much</span>
+    new_l = zeros(nr,length(bpm));
+    bpm_vect = zeros(nr,length(bpm));
+
+    <span class="keyword">for</span> i = 1:length(bpm) <span class="comment">% for each bpm's goal</span>
+
+        s = set_system9(l(i),s.m);    <span class="comment">% set system with l for linear system</span>
+        y=sim(<span class="string">'metron'</span>,options);    <span class="comment">% simulation</span>
+        bpm_vect(1,i) = getBPM(y,s);     <span class="comment">% bpm for linear system</span>
+
+        <span class="keyword">if</span> bpm_vect(1,i) &gt; bpm(i) <span class="comment">% ponctual mass is to close from the spring</span>
+            new_l(:,i) = linspace(l(i),0.25,nr);
+        <span class="keyword">elseif</span> bpm_vect(1,i) &lt; bpm(i) <span class="comment">% ponctual mass is to far from the spring</span>
+            new_l(:,i) = linspace(0.05,l(i),nr);
+            new_l(:,i) = flip(new_l(:,i)); <span class="comment">% decreasing length</span>
+        <span class="keyword">else</span> <span class="comment">% bpm for nonlinear system and linear system is equal</span>
+            new_l(nr,i) = l(i); <span class="comment">% previously computed</span>
+            bpm_vect(nr,i) = bpm(i); <span class="comment">% previously computed</span>
+            <span class="keyword">continue</span>;
+        <span class="keyword">end</span>
+
+        <span class="keyword">for</span> j = 2:nr    <span class="comment">% simulate new values</span>
+
+            s = set_system9(new_l(j,i),s.m);    <span class="comment">% set system with l for linear system</span>
+            y=sim(<span class="string">'metron'</span>,options);    <span class="comment">% simulation</span>
+            bpm_vect(j,i) = getBPM(y,s);     <span class="comment">% bpm for linear system</span>
+
+            <span class="keyword">if</span> bpm_vect(j,i) == bpm(i)  <span class="comment">% found the exact length</span>
+                new_l(nr,i) = new_l(j,i); <span class="comment">% returnable values</span>
+                bpm_vect(nr,i) = bpm_vect(j,i); <span class="comment">% returnable values</span>
+                <span class="keyword">break</span>
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> j &lt; nr <span class="comment">% there is still values to compute</span>
+            <span class="comment">% convergence of new_l based on last two lengths</span>
+                <span class="keyword">if</span> bpm(i) &lt; bpm_vect(j,i) <span class="comment">% bpm's goal is lower so the next length up to test has to be bigger</span>
+                    <span class="keyword">if</span>  bpm(i) &lt; bpm_vect(j-1,i) <span class="comment">% did not cross the goal, same way</span>
+                        new_l(j+1,i) =  new_l(j,i) + (new_l(j,i)-new_l(j-1,i)); <span class="comment">% increase a little</span>
+                    <span class="keyword">else</span> <span class="comment">% crossed the goal, change increment sinal</span>
+                        new_l(j+1,i) = (new_l(j,i) + new_l(j-1,i))/2; <span class="comment">% convergence</span>
+                    <span class="keyword">end</span>
+                <span class="keyword">else</span> <span class="comment">% bpm's goal is bigger so the next length up to test has to be lower</span>
+                    <span class="keyword">if</span>  bpm(i) &gt; bpm_vect(j-1,i) <span class="comment">% did not cross the goal, same way</span>
+                        new_l(j+1,i) =  new_l(j,i) + (new_l(j,i)-new_l(j-1,i)); <span class="comment">% decrease a little</span>
+                    <span class="keyword">else</span> <span class="comment">% crossed the goal, change increment sinal</span>
+                        new_l(j+1,i) = (new_l(j,i) + new_l(j-1,i))/2; <span class="comment">% convergence</span>
+                    <span class="keyword">end</span>
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    l_return =  new_l(nr,:);
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function l_return = lgetNLS(bpm,l,s,c) % c is needed in SIMULINK
+    % approx the values from a linear system to a nonlinear system
+    % return BPM of a system, and plot a figure with time response and
+    %   searchs the best ls, using a convergence method
+    
+    % bpm's goal
+    bpm = reshape(bpm,[],1);   % change every kind of vector to 1D vector
+
+    options.SrcWorkspace = 'current'; % set function's worspace for simulink
+    
+    nr = 10; % number max of points up to test. Most likely to converge before reach that much
+    new_l = zeros(nr,length(bpm));
+    bpm_vect = zeros(nr,length(bpm));
+    
+    for i = 1:length(bpm) % for each bpm's goal
+        
+        s = set_system9(l(i),s.m);    % set system with l for linear system
+        y=sim('metron',options);    % simulation
+        bpm_vect(1,i) = getBPM(y,s);     % bpm for linear system
+        
+        if bpm_vect(1,i) > bpm(i) % ponctual mass is to close from the spring
+            new_l(:,i) = linspace(l(i),0.25,nr);
+        elseif bpm_vect(1,i) < bpm(i) % ponctual mass is to far from the spring
+            new_l(:,i) = linspace(0.05,l(i),nr);
+            new_l(:,i) = flip(new_l(:,i)); % decreasing length 
+        else % bpm for nonlinear system and linear system is equal 
+            new_l(nr,i) = l(i); % previously computed
+            bpm_vect(nr,i) = bpm(i); % previously computed
+            continue;
+        end
+        
+        for j = 2:nr    % simulate new values
+            
+            s = set_system9(new_l(j,i),s.m);    % set system with l for linear system
+            y=sim('metron',options);    % simulation
+            bpm_vect(j,i) = getBPM(y,s);     % bpm for linear system
+          
+            if bpm_vect(j,i) == bpm(i)  % found the exact length
+                new_l(nr,i) = new_l(j,i); % returnable values
+                bpm_vect(nr,i) = bpm_vect(j,i); % returnable values
+                break
+            end
+            
+            if j < nr % there is still values to compute
+            % convergence of new_l based on last two lengths 
+                if bpm(i) < bpm_vect(j,i) % bpm's goal is lower so the next length up to test has to be bigger 
+                    if  bpm(i) < bpm_vect(j-1,i) % did not cross the goal, same way
+                        new_l(j+1,i) =  new_l(j,i) + (new_l(j,i)-new_l(j-1,i)); % increase a little
+                    else % crossed the goal, change increment sinal
+                        new_l(j+1,i) = (new_l(j,i) + new_l(j-1,i))/2; % convergence
+                    end
+                else % bpm's goal is bigger so the next length up to test has to be lower
+                    if  bpm(i) > bpm_vect(j-1,i) % did not cross the goal, same way
+                        new_l(j+1,i) =  new_l(j,i) + (new_l(j,i)-new_l(j-1,i)); % decrease a little
+                    else % crossed the goal, change increment sinal
+                        new_l(j+1,i) = (new_l(j,i) + new_l(j-1,i))/2; % convergence
+                    end
+                end
+            end    
+        end
+    end
+    l_return =  new_l(nr,:);
+end
+
+
+##### SOURCE END #####
+--></body></html>

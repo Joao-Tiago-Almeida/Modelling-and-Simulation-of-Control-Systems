@@ -1,0 +1,225 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>fromBPM</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-13"><meta name="DC.source" content="fromBPM.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> [l,m] = fromBPM(bpm,t)
+    <span class="comment">% return values for m and l, based on kwonw BPMs</span>
+    <span class="comment">% this function works for every format of bpm array</span>
+    <span class="comment">% if nargin &gt; 1 plot an 3D figure</span>
+
+    <span class="comment">% known variables</span>
+    L = 0.25;  <span class="comment">% m - arm length</span>
+    M = 0.1; <span class="comment">% Kg - arm mass</span>
+    k = 0.35;    <span class="comment">% Nm/rad</span>
+    g = 9.8;    <span class="comment">% m/s^2 - gravitational acceleration</span>
+    beta = 0.001;   <span class="comment">% Nms/rad</span>
+
+    mMax = (k/g -M*L/2)/L; <span class="comment">% mass maximum to a stable system, for all lengths</span>
+
+    l = 0.05:1e-3:0.25; l=l';   <span class="comment">% limits for l</span>
+    m = 1e-3:1e-3:mMax; m=m';   <span class="comment">% limits for L</span>
+
+    bpm = sort(reshape(bpm,1,1,[]));   <span class="comment">% change every kind of vector, to 3D sorted array</span>
+    wd = bpm*pi/60; <span class="comment">% known from the question 9</span>
+
+    [l,m] = meshgrid(l,m);
+    l = repmat(l,1,1,size(wd,3));  <span class="comment">% increase 3rd dimension size to the number of bpm</span>
+
+    num = k - g * (l.*m + M*L/2);
+    J = m.*l.^2 + 3\M*L^2;  <span class="comment">% moment of inertia</span>
+
+    wn_c = real(sqrt(num./J));  <span class="comment">% calculated natural frequency</span>
+
+    <span class="comment">% Due to damping ratio is not 0, natural and damping frequencies differ</span>
+    zeta = beta./(2*J.*wn_c); <span class="comment">% damping ratio</span>
+    wd_c = real(wn_c.*sqrt(1-zeta.^2)); <span class="comment">% relation between frequencies</span>
+
+
+    <span class="keyword">if</span> nargin &gt; 1   <span class="comment">% 3D plot for BPM in order of mass and length</span>
+        figure(); clf;
+        surfc(l(:,:,1),m,wd_c(:,:,1)*60/pi)
+        shading <span class="string">interp</span>;
+        colormap(jet);
+        colorbar;
+        view(75,15);
+        title(t,<span class="string">'FontName'</span>,<span class="string">'Arial'</span>,<span class="string">'FontSize'</span>,14,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>);
+        ylabel(<span class="string">'mass [Kg]'</span>,<span class="string">'FontName'</span>,<span class="string">'Arial'</span>,<span class="string">'FontSize'</span>,13,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>);
+        xlabel(<span class="string">'length [m]'</span>,<span class="string">'FontName'</span>,<span class="string">'Arial'</span>,<span class="string">'FontSize'</span>,13,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>);
+        zlabel(<span class="string">'BPM'</span>,<span class="string">'FontName'</span>,<span class="string">'Arial'</span>,<span class="string">'FontSize'</span>,13,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>);
+
+        figure(); clf;
+        contourf(l(:,:,1),m,wd_c(:,:,1)*60/pi)
+        colormap(jet);
+        colorbar;
+        title(<span class="string">'BPM'</span>,<span class="string">'FontName'</span>,<span class="string">'Arial'</span>,<span class="string">'FontSize'</span>,14,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>);
+        ylabel(<span class="string">'mass [Kg]'</span>,<span class="string">'FontName'</span>,<span class="string">'Arial'</span>,<span class="string">'FontSize'</span>,13,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>);
+        xlabel(<span class="string">'length [m]'</span>,<span class="string">'FontName'</span>,<span class="string">'Arial'</span>,<span class="string">'FontSize'</span>,13,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>);
+
+    <span class="keyword">end</span>
+
+    w_dif = abs(wd_c - wd); <span class="comment">% double matrix of differences with l1,2 * m</span>
+
+    min_m = min(w_dif,[],2);   <span class="comment">% get the minimum difference per mass index for each matrix</span>
+    min_m = sum(min_m,3); <span class="comment">% sum the differences of each matrix. vector with both differences per mass index (row)</span>
+    [~,row] = min(min_m);  <span class="comment">% get minimum mass index for both lengths</span>
+
+    [~,col] = min(w_dif(row,:,:)); <span class="comment">% get the minimum length index for each matrix for specific mass index</span>
+    col = squeeze(col); <span class="comment">% rearange colunms</span>
+
+    l = l(row,col); <span class="comment">% m - distance to mass, differs for each BPM</span>
+    m = m(row,col(1)); <span class="comment">% Kg - pontual mass. constant among BPM</span>
+
+    disp([<span class="string">'[GOAL] BPM: '</span> num2str(squeeze(bpm)')]);
+    disp([<span class="string">'[GOAL] natural frequency: '</span> num2str(squeeze(wd)')]);
+    disp([<span class="string">'[COMPUTED] damping frequency: '</span> num2str(wd_c(row,col))]);
+    w_dif = squeeze(w_dif(row,col,:)); disp([<span class="string">'[COMPUTED] differences: '</span> num2str(diag(w_dif)')]);
+    disp([<span class="string">'[COMPUTED] length - l: '</span> num2str(l)]);
+    disp([<span class="string">'[COMPUTED] mass - m: '</span> num2str(m)]);
+
+ <span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function [l,m] = fromBPM(bpm,t)
+    % return values for m and l, based on kwonw BPMs
+    % this function works for every format of bpm array
+    % if nargin > 1 plot an 3D figure
+    
+    % known variables
+    L = 0.25;  % m - arm length
+    M = 0.1; % Kg - arm mass
+    k = 0.35;    % Nm/rad
+    g = 9.8;    % m/s^2 - gravitational acceleration
+    beta = 0.001;   % Nms/rad
+    
+    mMax = (k/g -M*L/2)/L; % mass maximum to a stable system, for all lengths
+    
+    l = 0.05:1e-3:0.25; l=l';   % limits for l
+    m = 1e-3:1e-3:mMax; m=m';   % limits for L
+    
+    bpm = sort(reshape(bpm,1,1,[]));   % change every kind of vector, to 3D sorted array
+    wd = bpm*pi/60; % known from the question 9
+     
+    [l,m] = meshgrid(l,m);
+    l = repmat(l,1,1,size(wd,3));  % increase 3rd dimension size to the number of bpm 
+    
+    num = k - g * (l.*m + M*L/2);
+    J = m.*l.^2 + 3\M*L^2;  % moment of inertia
+    
+    wn_c = real(sqrt(num./J));  % calculated natural frequency
+    
+    % Due to damping ratio is not 0, natural and damping frequencies differ
+    zeta = beta./(2*J.*wn_c); % damping ratio
+    wd_c = real(wn_c.*sqrt(1-zeta.^2)); % relation between frequencies
+    
+    
+    if nargin > 1   % 3D plot for BPM in order of mass and length
+        figure(); clf;
+        surfc(l(:,:,1),m,wd_c(:,:,1)*60/pi)   
+        shading interp;
+        colormap(jet);
+        colorbar;
+        view(75,15);
+        title(t,'FontName','Arial','FontSize',14,'interpreter','latex');
+        ylabel('mass [Kg]','FontName','Arial','FontSize',13,'interpreter','latex');
+        xlabel('length [m]','FontName','Arial','FontSize',13,'interpreter','latex');
+        zlabel('BPM','FontName','Arial','FontSize',13,'interpreter','latex');
+        
+        figure(); clf;
+        contourf(l(:,:,1),m,wd_c(:,:,1)*60/pi)   
+        colormap(jet);
+        colorbar;
+        title('BPM','FontName','Arial','FontSize',14,'interpreter','latex');
+        ylabel('mass [Kg]','FontName','Arial','FontSize',13,'interpreter','latex');
+        xlabel('length [m]','FontName','Arial','FontSize',13,'interpreter','latex');
+        
+    end
+    
+    w_dif = abs(wd_c - wd); % double matrix of differences with l1,2 * m
+    
+    min_m = min(w_dif,[],2);   % get the minimum difference per mass index for each matrix
+    min_m = sum(min_m,3); % sum the differences of each matrix. vector with both differences per mass index (row)
+    [~,row] = min(min_m);  % get minimum mass index for both lengths
+       
+    [~,col] = min(w_dif(row,:,:)); % get the minimum length index for each matrix for specific mass index
+    col = squeeze(col); % rearange colunms
+    
+    l = l(row,col); % m - distance to mass, differs for each BPM
+    m = m(row,col(1)); % Kg - pontual mass. constant among BPM
+
+    disp(['[GOAL] BPM: ' num2str(squeeze(bpm)')]);
+    disp(['[GOAL] natural frequency: ' num2str(squeeze(wd)')]);
+    disp(['[COMPUTED] damping frequency: ' num2str(wd_c(row,col))]);
+    w_dif = squeeze(w_dif(row,col,:)); disp(['[COMPUTED] differences: ' num2str(diag(w_dif)')]);
+    disp(['[COMPUTED] length - l: ' num2str(l)]);
+    disp(['[COMPUTED] mass - m: ' num2str(m)]);
+    
+ end
+
+   
+##### SOURCE END #####
+--></body></html>
