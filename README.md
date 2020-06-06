@@ -13,24 +13,24 @@ During Modelling and Simulation classes I learnt how to deal with simple problem
 # Introduction to MATLAB / SIMULINK programming
 How can we digitally (discrete time) study natural problems (continuous problems)?
 
-This exercise simulate nonlinear systems in SIMULINK such as car movement, symbiosis predator/prey relationship or Double pendulum' movement. With MATLAB software it was possible to manage simulations and evalute results.
+This exercise simulates nonlinear systems in SIMULINK such as car movement, symbiosis predator/prey relationship or Double pendulum' movement. With MATLAB software it was possible to manage simulations and evalute results.
 
 # Optimization of a hard disk's servomechanism
-How does servomechanism behaviours?
+How does servomechanism behave?
 
 Based on state-space transformation, this exercise involves the behaviour of a servomechanism and his responses to multiple stimuli.
 
 # Dynamics of a basic metronome
 
-How can we simple predict the response of and non linear systems, during his steady-state?
+How can we predict the response of and non linear systems, during his steady-state?
 
-Here it is worked with state-space which represents model linearization of a steady-state such as a metronome oscillating around steady point.
+Here it's worked with state-space which represents model linearization of a steady-state such as a metronome oscillating around a steady point.
 
 # Detection of WiFi hotspots
-What it is the behavior of a chain based on his transition states probability?
-Is it possible to locate a antenna based various receivers' information?
+What is the behavior of a chain based on his transition states probability?
+Is it possible to locate an antenna based on various receivers' information?
 
-Here it is simulate the time evolution of a graph based on Markov Chain model with probabilistic methods and Monte Carlo Method.
+Here is simulated the time evolution of a graph based on Markov Chain model with probabilistic methods and Monte Carlo Method.
 
 
 
