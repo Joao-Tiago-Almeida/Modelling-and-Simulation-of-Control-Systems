@@ -34,8 +34,8 @@ Here is simulated the time evolution of a graph based on Markov Chain model with
 
 
 
-## Git Commands
-- [Git Commands](https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html)
+## Useful Git Commands
+- [font](https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html)
 ```
 $ git checkout master
 
