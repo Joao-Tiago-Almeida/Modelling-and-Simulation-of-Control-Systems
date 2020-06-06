@@ -9,6 +9,10 @@ During Modelling and Simulation classes I learnt how to deal with simple problem
 - Estimating of the parameters of a dynamic system using least squares' method;
 - Markov chain problems regarding discrete event systems;
 - Interconnection of Inertial's and Body's references frame for modeling Autonomous Vehicles.
+<<<<<<< HEAD
+=======
+
+>>>>>>> joao_almeida
 
 ## Git Commands
 - [Git Commands](https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html)
