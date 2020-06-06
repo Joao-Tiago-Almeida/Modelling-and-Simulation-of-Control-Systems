@@ -1,0 +1,68 @@
+3a)
+
+
+De maneira a testar empíricamente o que foi estudado em termos probabilísticos na alínea anterior, realizou-se o método de Monte Carlo (função : 'state_mmc_gen()'). Este método consiste em repetir a mesma operação várias vezes e apresentar o resultado comparando com o resultado teórico obtido pela Teoria de Markov. Assim esta alínea encontra-se em coerência com o método desenvolvido anteriormente. Para que tal aconteça, após ter sido aplicado o método de Monte Carlo, transformou-se a matriz resultante [MxN] (em que [M] é o número de runs e [N], o tamanho de cada run) numa matriz com a média da probabilidade de cada estado em cada instante [N*20]. A função que permite fazer a transformação é 'state_to_probability()',.
+
+(GRÁFICO DE BARRAS E EVOLUÇÃO TEMPORAL DA CADEIA DE MARKOV ORIGINAL)
+
+Analisando em detalhe o resultado referente à cadeia de Markov original, a distribuição de probabilidades, apesar de muito próxima da que foi determinada em 2, evidência que o método de Monte Carlo é ruidoso e portanto nota-se ligeiras incertezas.
+Em relação à evolução temporal, é bem evidente a convergência do método para um número de runs elevado. Em particular, o ritmo de convergência foi calculado comparando com os valores de probabilidades limites. Assim, calculou-se o desvio de probabilidades de cada estado em cada instante na run, e o segredo consiste em pesar a diferença de cada estado pela probabilidade de o mesmo acontecer, pois diferencia os estados com base na sua influência na run. Este raciocínio está presente na linha 15 da função 'convergence_pace()' (dif = abs(m-v)*v';) em que 'm' é a matriz [Nx20] e 'v' o vetor de probabilidade limite de Markov referente a cada estado [1x20].
+
+Em contraste com a alínea 2c, esta confirmou o esperado, visto que apresentou um ritmo de convergência mais baixo. Este acontecimento deve-se ao facto do método de Monte Carlo apresentar ruído e consequentemente incertezas face aos valores limites.
+
+De seguida repetiu-se o raciocíno em cima para as variantes do gráfico da alínea 2d.
+
+(GRÁFICO DE BARRAS E EVOLUÇÃO TEMPORAL DA CADEIA DE MARKOV OTIMIZADA)
+
+Pelo gráfico da distribuição das probabilidades, nota-se claramente que esta cadeia está mais equilíbrada que a cadeia original e que o método de Monte Carlo faz jus ao resultado teórico previsto pela teoria de Markov.
+Relativamente à evolução temporal, comparando com a cadeia de Markov original observou-se menor tempo de convergência, fruto de uma circulação mais livre do Token. É de salientar que apesar da probabilidade referente aos estados mais prováveis ainda se encontre a convergir, como a cadeia tem uma entropia altíssima, as alterações significativas ocorrem entre estados mais prováveis preservando a probabilidade dos restantes estados. Consequentemente, fruto da seleção da importância de cada estado no cálculo do ritmo de convergência, rapidamente nesta cadeia muitos estados atingem a sua probabilidade limite e portanto o ritmo de convergência é elevadissímo.
+
+(GRÁFICO DE BARRAS E EVOLUÇÃO TEMPORAL DA CADEIA DE MARKOV com Jamming)
+
+Por sua vez, a distribuição de probabilidades para a cadeia de Markov com Jamming encontra-se menos bem (face à determinada na pergunta 2d) fruto da disposição aleatória do estado inicial em cada run. Este acontecimento pode atrasar bastante a passagem do Token para a ilha {Estados: 6-11-5-16-6} (que praticamente o retêm).
+Em relação ao ritmo de convergência, este vai ser muito demorado devido ao ruído mais que evidente do método de Monte Carlo. A permissa anterior é confirmada com os resultados obtidos: não convergência do gráfico para as mesmas condições inicias e entropia obtida.
+
+
+
+
+3b)
+
+
+Nesta questão estimou-se o erro entre a distância calculada de acordo com a pergunta 2b usando (2)-(3), e a fonte (imóvel). De maneira estudar o comportamento geral da cadeia de Markov Original, simulou-se o seu comportamento e comparou-se com algumas variantes tais como a cadeia de Markov Otimizada ou com Jamming, e ainda nos casos em que a o estado inicial priviligia os estados menos prováveis.
+Tendo em conta que é usado um método de triangulação, apenas apartir terceira amostra (inclusive) é que os resultados fazem sentido (nas duas primeias instâncias os erros não têm significado). Assim, é totalmente legítimo afirmar que os resultados encontram-se corretos caso se note uma convergência para 0 (caso ideal), apartir da terceira instância. De modo a facilitar a leitura (e preservando fiabilidade), apenas foi a estudo os primeiros 10% da matriz, visto que só por si têm uma estabilidade muito elevada.
+
+(GRÁFICO COM ERRO DA CADEIA DE MARKOV ORIGNAL)
+
+Tal como previsto o erro obtido tem uma forte atenuação à medida que o token circula na rede, pois o número de amostras é maior. A convergência deste método é evidente apartir de poucos instantes, o que confirma a elevada qualidade do método.
+
+(GRÁFICO COM ERRO DA CADEIA DE MARKOV OTIMIZADA)
+
+Em comparação à estimativa do erro obtida na cadeia de Markov Original, a cadeia de Markov Otimizada apresenta um ligeira redução do erro, porém quase impercetível. O resultado está de acordo com a relação de entropia de ambas as cadeias ser muito parecido.
+
+(GRÁFICO COM ERRO DA CADEIA DE MARKOV com JAMMING)
+
+A evolução do erro através da cadeia de Markov conincide com o esperado pois a convergência é mais demorada,visto que neste caso peca a diversidade de estados. Em particular observa-se que apartir de um certo erro este parece que estabiliza num valor perto de zero mas não nulo. Estudando a localização da ilha no Mapa, esta encontra-se distante da fonte e portanto é normal que haja um erro associado. O facto de de não haver (ou haver pouquissímas) informação de pontos geograficamente distantes inter-estados como geograficamente próximos estado-fonte, também influência no erro obtido.
+
+(GRÁFICOS COM ERROS DA CADEIA DE MARKOV ORIGINAL com estados menos priviligiados)
+
+Primeiramente observa-se que nestes casos, o primeiro instante só tem 1 valor. Isto aconetce pois o estudo consiste analisar a evolução do tempo com o estado inicial constante para cada gráfico, priviligiando um dos estados menos prováveis de obter o token posteriormente.
+Nestes casos priviligiámos uma circulação inicial incomum e portanto até a run atingir a normalidade, obtemos sequências de transições de estados menos comuns. Assim a diversidade de dados recolhidos e a analisar aumenta e é natural que a convergência deste do erro tenda para 0 mais rapidamente, conforme se observa pelas figuras anteriores.
+
+
+3c)
+
+Neste caso simulou-se uma movimentação lenta (linha 19: sourcePos = sourcePos + cumsum(2*(rand(size(y,2),2)-0.5)); (função: 'RSS_mmc()')), no máximo 1 unidade (x,y) por instante, com a posição inicial da source (85,30). O Fator de esquecimento consiste em pesar as medidas anteriores de modo que não interfiram tanto no cálculo da posição no instante presente, visto que foram obtidas para uma possível localização diferente da fonte. O fato de esquecimento $\lambda$ rege-se da seguinte maneira:
+
+$\lambda^n, , \lambda \in [0 1], n \in \field{N}$
+
+(GRÁFICOS COM ERROS DA CADEIA DE MARKOV ORIGINAL $\lambda$ = 1)
+
+No primeiro caso, como o fator de esquecimento é 'nulo' e a movimentação em torno da fonte é lenta, as medidas em instantes anteriores contribuem com bastante relevância da estimativa, e portanto não é notado grande diferença para com o gráfico obtido, nas mesmas condições excepto a movimentação da fonte, da alínea anterior.
+
+(GRÁFICOS COM ERROS DA CADEIA DE MARKOV ORIGINAL $\lambda$ = 0.7)
+
+É pretendido agora descobrir um valor tal que melhor se apoxima-se da condição seguinte (que é válida para x=1) $\frac{x}{10}^x < 0.1 $. Por outras palavras, encontrar um algarismo que em número inteiro representa o número de instantes (n) e em número decimal o fator de esquecimento ($\lambda$), de forma a que o fator de esquecimento diminuísse 10 vezes ao fim de n instantes. Assim é possível prever que com $\lamdba = 0.7 $, a estimativa de erro da posição da fonte apresenta o mesmo comportamento que o previamente estudado, mas que o peso de instantes anteriores é menor. A vantagem deste método remete a numa possível implementação prática, a 'stack' não fique tão cheia pois a partir de um certo instante a informação antiga é irrelevante (peso muito baixo). Assim o método assemelha-se a uma 'moving weight average'.
+
+(GRÁFICOS COM ERROS DA CADEIA DE MARKOV ORIGINAL $\lambda$ = 0.3)
+
+Finalmente, reduziu-se o fator de esquecimento para $\lambda = 0.3 $. Neste caso, observamos a estabilização do erro num valor distante de 0, fruto do elevado peso que os instantes recentes têm. Analisando mais profundamente, vericamos que após o pico inicial que ocorre no terceiro instante, o fator de esquecimento permite tirar da equação as primeiras medidas que não têm significado ou que apresentam erros significativos, mantendo-se a estimativa do erro aproximandamente constante logo de seguida. Referir que neste caso, os erros associados são os mais dispersos embora que a mediana (linha vermelha de cada caixa) é mais constante ao longo do tempo e apresenat valores mais baixos.
