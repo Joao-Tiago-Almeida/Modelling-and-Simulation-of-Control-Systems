@@ -10,23 +10,23 @@ During Modelling and Simulation classes I learnt how to deal with simple problem
 - Markov chain problems regarding discrete event systems;
 - Interconnection of Inertial's and Body's references frame for modeling Autonomous Vehicles.
 
-# [Introduction to MATLAB / SIMULINK programming](./Introduction to MATLAB : SIMULINK programming/lab1.m)
+# [Introduction to MATLAB / SIMULINK programming](./Introduction%20to%20MATLAB%20:%20SIMULINK%20programming)
 How can we digitally (discrete time) study natural problems (continuous problems)?
 
 This exercise simulates nonlinear systems in SIMULINK such as car movement, symbiosis predator/prey relationship or Double pendulum' movement. With MATLAB software it was possible to manage simulations and evalute results.
 
-# [Optimization of a hard disk's servomechanism](Lab_MSim/Optimization\of\a\hard\disk's\servomechanism/lab2_msim.m)
+# [Optimization of a hard disk's servomechanism](./Optimization%20of%20a%20hard%20disk's%20servomechanism)
 How does servomechanism behave?
 
 Based on state-space transformation, this exercise involves the behaviour of a servomechanism and his responses to multiple stimuli.
 
-# Dynamics of a basic metronome
+# [Dynamics of a basic metronome](./Dynamics%20of%20a%20basic%20metronome)
 
 How can we predict the response of and non linear systems, during his steady-state?
 
 Here it's worked with state-space which represents model linearization of a steady-state such as a metronome oscillating around a steady point.
 
-# Detection of WiFi hotspots
+# [Detection of WiFi hotspots](./Detection%20of%20WiFi%20hotspots)
 What is the behavior of a chain based on his transition states probability?
 Is it possible to locate an antenna based on various receivers' information?
 
