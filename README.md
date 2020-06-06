@@ -15,7 +15,7 @@ How can we digitally (discrete time) study natural problems (continuous problems
 
 This exercise simulates nonlinear systems in SIMULINK such as car movement, symbiosis predator/prey relationship or Double pendulum' movement. With MATLAB software it was possible to manage simulations and evalute results.
 
-# [Optimization of a hard disk's servomechanism](./Optimization of a hard disk's servomechanism/lab2_msim.m)
+# [Optimization of a hard disk's servomechanism](Lab_MSim/Optimization of a hard disk's servomechanism/lab2_msim.m)
 How does servomechanism behave?
 
 Based on state-space transformation, this exercise involves the behaviour of a servomechanism and his responses to multiple stimuli.
