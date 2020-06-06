@@ -10,7 +10,7 @@ During Modelling and Simulation classes I learnt how to deal with simple problem
 - Markov chain problems regarding discrete event systems;
 - Interconnection of Inertial's and Body's references frame for modeling Autonomous Vehicles.
 
-# Introduction to MATLAB / SIMULINK programming
+# [Introduction to MATLAB / SIMULINK programming](./Introduction to MATLAB / SIMULINK programming)
 How can we digitally (discrete time) study natural problems (continuous problems)?
 
 This exercise simulates nonlinear systems in SIMULINK such as car movement, symbiosis predator/prey relationship or Double pendulum' movement. With MATLAB software it was possible to manage simulations and evalute results.
